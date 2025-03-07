@@ -1,0 +1,4 @@
+Add below in LookupCHMIntegrationReports
+CHMMSISHIPMENTDETAILSYNCERPTOCHM,/Custom/Channel Management/MSI Shipment Details Sync/MsiShipmentDetailSync.xdo
+
+
