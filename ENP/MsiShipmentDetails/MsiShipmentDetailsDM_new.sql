@@ -6,21 +6,23 @@
 * Date          Author                 Version          Description                              *
 * -----------   ---------------------  -------          -----------------------------------------*
 * 27-Feb-2025   Gurpreet Singh         1.0              Initial Version                          *
-*************************************************************************************************/
-
-    /*(   SELECT org.organization_name 
+*************************************************************************************************/   
+SELECT /*+ parallel(dfla) parallel(wda) parallel(wdd) parallel(wnd) */ 
+    
+    (   SELECT org.organization_name 
         FROM inv_organization_definitions_v org
-        WHERE wnd.organization_id = org.organization_id 
+        WHERE org.organization_id = wnd.organization_id 
         AND ROWNUM=1 )                                      shipping_org_name
-    ,wdd.delivery_detail_id                                 delivery_detail_id 
     ,wda.delivery_id    	                                pl_no
+    ,wdd.delivery_detail_id                                 delivery_detail_id 
+    ,dha.order_number                                       so_no
     ,dha.order_type_code                                    sales_order_type
     ,dla.line_type_code                                     sales_order_line_type
-    --,wdd.inventory_item_id                                  inventory_item_id
+    ,wdd.inventory_item_id                                  inventory_item_id
     ,(  select item_number from egp_system_items 
         where inventory_item_id=wdd.inventory_item_id  
         AND ROWNUM=1 )                                      enphase_product_name
-    --,iut.serial_number                                      serial_number
+    ,iut.serial_number                                      serial_number
     ,TO_CHAR (cast(dfla.actual_ship_date as timestamp) 
         AT TIME ZONE 'PST',
         'DD-MON-YYYY','nls_date_language=American')         actual_ship_date
@@ -46,15 +48,7 @@
         hl.country
       )                                                     shipping_address
     ,wdd.subinventory                                       shipping_location
-    */
-    --,hl.country                                             country
-SELECT /*+ parallel(dfla) parallel(wda) parallel(wdd) parallel(wnd) */ 
-    
-    dha.order_number so_no
-    ,dla.header_id H1
-    ,dla.line_id L1
-    ,dfla.fulfill_line_id F1
-    ,wnd.*
+    ,hl.country                                             country
 FROM 
      doo_headers_all dha
 	,doo_lines_all dla

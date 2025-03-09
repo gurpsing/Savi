@@ -301,12 +301,20 @@ AS
     AS
     BEGIN
         
-        
+        UPDATE CHM_INTEGRATION_RUNS
+        SET 
+             PHASE                  = 'Completed'
+            ,STATUS                 = 'Success'
+            ,LAST_COMPLETED_STAGE   = 'Data Merge'
+            ,LOG                    = LOG || CHR(10) ||'Integration completed successfully'
+        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
+        COMMIT;
         
         OPEN P_OUT_DATA FOR
         SELECT TOTAL_SUCCESS_RECORDS,TOTAL_ERROR_RECORDS 
-        FROM chm_integration_runs 
+        FROM CHM_INTEGRATION_RUNS 
         WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
+        
     END FINISH_INTEGRATION_RUN;
     
     
