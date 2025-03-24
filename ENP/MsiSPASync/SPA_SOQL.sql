@@ -1,3 +1,10 @@
+Integration name:       CHMMSISpaDistiInstallerSyncSFDCtoCHM
+Identifier:             CHMMSISPADISTIINSTALLERSYNCSFDCT
+Description:            MSI SPA Distributor, Installer and Geo Restriction Sync from Sales force to CHM
+Package:                com.enphase.msi
+Version:                01.00.0000
+
+
 -------------------------------------------------------------------------------------------------------------
 --SPA/Quote     (CHM_MSI_SPA_HEADER)
 -------------------------------------------------------------------------------------------------------------
@@ -140,7 +147,7 @@ AND special_pricing_type__c IN (
 		)
 
 -------------------------------------------------------------------------------------------------------------
---System Attachment (On SPA Level)     CHM_MSI_SPA_SYSTEM_ATTACHMENT_INCENTIVES
+--System Attachment (On SPA Level)     CHM_MSI_SPA_SYSTEM_ATTACHMENT_INCENTIVES -> CHM_MSI_SPA_SYSTEM_ATTACHMENTS
 -------------------------------------------------------------------------------------------------------------
 SELECT Id
 	,IsDeleted
@@ -164,7 +171,7 @@ FROM SPA_MSI_System_Attachment__c
 WHERE lastmodifieddate >= &LastModifiedDate
 
 -------------------------------------------------------------------------------------------------------------
---Unit Activation   (On SPA Level)   CHM_MSI_SPA_UNIT_ACTIVATION_INCENTIVES
+--Unit Activation   (On SPA Level)   CHM_MSI_SPA_UNIT_ACTIVATION_INCENTIVES -> CHM_MSI_SPA_UNIT_ACTIVATIONS
 -------------------------------------------------------------------------------------------------------------
 SELECT Id
 	,IsDeleted
@@ -189,7 +196,7 @@ WHERE lastmodifieddate >= &LastModifiedDate
 
 
 -------------------------------------------------------------------------------------------------------------
---System Size Incentive  (On SPA Level)  CHM_MSI_SPA_SYSTEM_SIZE_INCENTIVES_AUDIT
+--System Size Incentive  (On SPA Level)  CHM_MSI_SPA_SYSTEM_SIZE_INCENTIVES_AUDIT   -> CHM_MSI_SPA_SYSTEM_SIZE_AUDIT     (System Size)
 -------------------------------------------------------------------------------------------------------------
 SELECT Id
 	,IsDeleted
@@ -216,13 +223,46 @@ from SPA_MSI_System_Size_Incentive__c
 WHERE lastmodifieddate >= &LastModifiedDate
  
 -------------------------------------------------------------------------------------------------------------
---Product     (On SPA Level) CHM_MSI_SPA_PRODUCTS
+--Product     (Master Table) CHM_MSI_SPA_PRODUCTS
 -------------------------------------------------------------------------------------------------------------
 SELECT id
 	,MSI_Eligible__c
 	,MSI_System_Attachment_Eligible__c
+    ,IsActive
+    ,Name
+    ,ProductCode
 from Product2 
 WHERE lastmodifieddate >= &LastModifiedDate
+
+
+SELECT FIELDS(ALL) FROM Product2 LIMIT 5
+
+
+-------------------------------------------------------------------------------------------------------------
+--SPA Branch Installers  CHM_MSI_SPA_INSTALLERS
+-------------------------------------------------------------------------------------------------------------
+SELECT Id
+	,IsDeleted
+	,Name
+	,CurrencyIsoCode
+	,CreatedDate
+	,CreatedById
+	,LastModifiedDate
+	,LastModifiedById
+	,SystemModstamp
+	,LastActivityDate
+	,LastViewedDate
+	,LastReferencedDate
+	,Installer_Name__c
+	,SPA__c
+	,Status__c
+	,Installer_Enlighten_Id__c
+FROM SPA_Branch_Installer__c
+WHERE lastmodifieddate >= &pLastModifiedDate
+
+--LastModifiedDate is of format: (YYYY-MM-DDT00:00:00.000Z)
+--2020-01-01T00:00:00.000Z
+
 
 
 

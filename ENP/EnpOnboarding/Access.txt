@@ -1,0 +1,6 @@
+https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com/
+SVC_INT_ADMIN:welcome123
+
+
+ReportServiceSOAPConnection
+https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com:443/xmlpserver/services/ExternalReportWSSService?wsdl

@@ -39,6 +39,7 @@ AS
             ,SHIPPING_ADDRESS               VARCHAR2(4000)
             ,SHIPPING_LOCATION              VARCHAR2(4000)
             ,COUNTRY                        VARCHAR2(4000)
+            ,SYNC_FOR_DATE                  DATE
             ,ATTRIBUTE1                     VARCHAR2(4000) 
             ,ATTRIBUTE2                     VARCHAR2(4000) 
             ,ATTRIBUTE3                     VARCHAR2(4000) 
@@ -79,6 +80,18 @@ AS
     PROCEDURE FINISH_INTEGRATION_RUN (
          P_IN_OIC_INSTANCE_ID       IN VARCHAR2
         ,P_OUT_DATA                 OUT    SYS_REFCURSOR
+    );
+    
+    
+    --Procedure to update log
+    PROCEDURE UPDATE_LOG (
+         P_IN_LOG                IN VARCHAR2
+        ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
+    );
+    
+    --Procedure to check if any record failed
+    PROCEDURE CHECK_FAILED_RECORDS (
+        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
     );
 
 END CHM_MSI_SHIPMENT_DETAIL_PKG;

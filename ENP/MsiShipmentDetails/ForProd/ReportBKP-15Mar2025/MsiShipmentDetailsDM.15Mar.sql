@@ -65,8 +65,6 @@ SELECT /*+ parallel(dha) parallel(dla) parallel(dfla) parallel(wda) parallel(wdd
       )                                                     shipping_address
     ,wdd.subinventory                                       shipping_location
     ,hl.country                                             country
-    ,TO_CHAR(TRUNC(dfla.last_update_date),
-        'YYYY-MM-DD','nls_date_language=American')          sync_for_date 
 FROM 
      doo_headers_all dha
     ,doo_lines_all dla
@@ -96,7 +94,7 @@ AND ship_hps.location_id        = hl.location_id
 AND dha.sold_to_party_id        = hp.party_id(+)
 AND wdd.delivery_detail_id      = imt.picking_line_id  
 AND imt.transaction_id          = iut.transaction_id
-AND hl.country                  <> 'US'
+--AND hl.country                  = DECODE( :P_COUNTRY,'N/A',hl.country,:P_COUNTRY)
 AND( 
     (   :P_ORDER_NUMBER = 'NA' AND 
         (   TRUNC(dfla.last_update_date) 

@@ -53,6 +53,7 @@ AS
                         ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).SHIPPING_ADDRESS                   SHIPPING_ADDRESS           
                         ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).SHIPPING_LOCATION                  SHIPPING_LOCATION          
                         ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).COUNTRY                            COUNTRY                    
+                        ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).SYNC_FOR_DATE                      SYNC_FOR_DATE                    
                         ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).ATTRIBUTE1                         ATTRIBUTE1                 
                         ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).ATTRIBUTE2                         ATTRIBUTE2                 
                         ,P_IN_CHM_MSI_SHIPMENT_DETAIL(I).ATTRIBUTE3                         ATTRIBUTE3                 
@@ -110,7 +111,8 @@ AS
                     ,CUST_ACCOUNT_NUMBER      
                     ,SHIPPING_ADDRESS         
                     ,SHIPPING_LOCATION        
-                    ,COUNTRY                  
+                    ,COUNTRY
+                    ,SYNC_FOR_DATE
                     ,ATTRIBUTE1               
                     ,ATTRIBUTE2               
                     ,ATTRIBUTE3               
@@ -161,6 +163,7 @@ AS
                     ,tmp.SHIPPING_ADDRESS         
                     ,tmp.SHIPPING_LOCATION        
                     ,tmp.COUNTRY                  
+                    ,tmp.SYNC_FOR_DATE                  
                     ,tmp.ATTRIBUTE1               
                     ,tmp.ATTRIBUTE2               
                     ,tmp.ATTRIBUTE3               
@@ -204,6 +207,7 @@ AS
                     ,SHIPPING_ADDRESS               = tmp.SHIPPING_ADDRESS         
                     ,SHIPPING_LOCATION              = tmp.SHIPPING_LOCATION        
                     ,COUNTRY                        = tmp.COUNTRY                  
+                    ,SYNC_FOR_DATE                  = tmp.SYNC_FOR_DATE                  
                     ,ATTRIBUTE1                     = tmp.ATTRIBUTE1               
                     ,ATTRIBUTE2                     = tmp.ATTRIBUTE2               
                     ,ATTRIBUTE3                     = tmp.ATTRIBUTE3               
@@ -236,6 +240,23 @@ AS
                 L_MERGE_COUNT := L_MERGE_COUNT + 1;
                 COMMIT;
                 
+            EXCEPTION
+                WHEN OTHERS THEN 
+                    L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
+                    UPDATE CHM_INTEGRATION_RUNS
+                    SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).HEADER_ID                 ||'-'     
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).LINE_ID                   ||'-'
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).FULFILL_LINE_ID	        ||'-'
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).DELIVERY_ID    	        ||'-'
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).DELIVERY_DETAIL_ID        ||'-'
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).DELIVERY_ASSIGNMENT_ID    ||'-'
+                                    ||P_IN_CHM_MSI_SHIPMENT_DETAIL(I).SERIAL_NUMBER             ||'] '
+                                    ||L_ERROR_MESSAGE                 
+                            ,LAST_UPDATE_DATE           = SYSDATE
+                    WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
+                    COMMIT;
+                
             END;
 
 
@@ -246,9 +267,10 @@ AS
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT)||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
+                ,LAST_UPDATE_DATE           = SYSDATE
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
@@ -266,7 +288,9 @@ AS
     BEGIN
     
         OPEN P_OUT_DATA FOR
-        SELECT to_char(dt.date_value,'DD-MON-YYYY') date_value,lkp.lookup_code country
+        SELECT 
+            to_char(dt.date_value,'DD-MON-YYYY') date_value
+            --,lkp.lookup_code country
         FROM (
             SELECT (TO_DATE(P_IN_FROM_DATE, 'DD-MON-YYYY')-1) + LEVEL - 1 AS date_value
             FROM DUAL
@@ -275,8 +299,8 @@ AS
                 WHEN P_IN_ORDER_NUMBER <> 'NA' THEN 1 
                 ELSE (TO_DATE(P_IN_TO_DATE, 'DD-MON-YYYY')+1) - (TO_DATE(P_IN_FROM_DATE, 'DD-MON-YYYY') -1) + 1 
             END
-        ) dt,
-        (   SELECT lookup_code FROM chm_lookup_values 
+        ) dt
+        /*,(   SELECT lookup_code FROM chm_lookup_values 
             WHERE chm_lookup_type_id IN ( 
                 SELECT chm_lookup_type_id FROM chm_lookup_types 
                 WHERE lookup_type           = 'CHM_MSI_SHIPMENT_SYNC_COUNTRY_RESTRICTION' 
@@ -288,8 +312,8 @@ AS
             UNION 
             SELECT 'N/A' FROM DUAL
             WHERE P_IN_ORDER_NUMBER <> 'NA'
-        ) lkp
-        ORDER BY 1; 
+        ) lkp*/
+        ORDER BY dt.date_value; 
     
     END GET_DATES;
     
@@ -307,17 +331,56 @@ AS
             ,STATUS                 = 'Success'
             ,LAST_COMPLETED_STAGE   = 'Data Merge'
             ,LOG                    = LOG || CHR(10) ||'Integration completed successfully'
+            ,LAST_UPDATE_DATE       = SYSDATE
+            ,COMPLETION_DATE        = SYSDATE
         WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
         COMMIT;
         
+        UPDATE CHM_INTEGRATIONS
+        SET 
+             LAST_RUN_STATUS        = 'Success'
+        WHERE LAST_RUN_ID = P_IN_OIC_INSTANCE_ID;
+        COMMIT;
+        
         OPEN P_OUT_DATA FOR
-        SELECT TOTAL_SUCCESS_RECORDS,TOTAL_ERROR_RECORDS 
+        SELECT NVL(TOTAL_SUCCESS_RECORDS,0) TOTAL_SUCCESS_RECORDS, NVL(TOTAL_ERROR_RECORDS,0) TOTAL_ERROR_RECORDS
         FROM CHM_INTEGRATION_RUNS 
         WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
         
     END FINISH_INTEGRATION_RUN;
     
+    --Procedure to update log
+    PROCEDURE UPDATE_LOG (
+         P_IN_LOG                IN VARCHAR2
+        ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
+    )
+    AS
     
+    BEGIN
+        UPDATE CHM_INTEGRATION_RUNS
+        SET 
+             LOG                        = LOG || CHR(10) || P_IN_LOG
+            ,LAST_UPDATE_DATE           = SYSDATE
+        WHERE CHM_INTEGRATION_RUN_ID    = P_IN_OIC_INSTANCE_ID;
+        COMMIT;
+    END UPDATE_LOG;
+    
+    --Procedure to check if any record failed
+    PROCEDURE CHECK_FAILED_RECORDS (
+        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
+    )
+    AS
+        L_COUNT NUMBER;
+    BEGIN
+        SELECT NVL(TOTAL_ERROR_RECORDS,0) INTO L_COUNT
+        FROM CHM_INTEGRATION_RUNS
+        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
+        
+        IF L_COUNT > 0 THEN
+            RAISE_APPLICATION_ERROR(-20001, 'Few Records failed to merge');
+        END IF;
+        
+    END CHECK_FAILED_RECORDS;
 
 END CHM_MSI_SHIPMENT_DETAIL_PKG;
 /
