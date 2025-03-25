@@ -258,12 +258,60 @@ SELECT Id
 	,Status__c
 	,Installer_Enlighten_Id__c
 FROM SPA_Branch_Installer__c
-WHERE lastmodifieddate >= &pLastModifiedDate
+WHERE lastmodifieddate >= &P_LAST_MODIFIED_DATE
+
 
 --LastModifiedDate is of format: (YYYY-MM-DDT00:00:00.000Z)
 --2020-01-01T00:00:00.000Z
 
 
+--SPA Geo Restrictions  CHM_MSI_SPA_GEO_DETAILS
+-------------------------------------------------------------------------------------------------------------
+SELECT Id
+	,IsDeleted
+	,Name
+	,CurrencyIsoCode
+	,CreatedDate
+	,CreatedById
+	,LastModifiedDate
+	,LastModifiedById
+	,SystemModstamp
+	,LastActivityDate
+	,LastViewedDate
+	,LastReferencedDate
+	,Country__c
+	,Zip_code__c
+	,Status__c
+	,State__c
+	,SPA__c
+FROM SPA_MSI_Geo_Detail__c
+WHERE lastmodifieddate >= &P_LAST_MODIFIED_DATE
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+--SPA Distributor   CHM_MSI_SPA_DISTRIBUTOR
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+SELECT Id
+	,IsDeleted
+	,Name
+	,CurrencyIsoCode
+	,CreatedDate
+	,CreatedById
+	,LastModifiedDate
+	,LastModifiedById
+	,SystemModstamp
+	,LastViewedDate
+	,LastReferencedDate
+	,SPATEST__c
+	,Distributor_Account__c
+	,SPA_Status__c
+	,Oracle_Customer_Number__c
+	,SPA_and_Opportunities__c
+	,Line_Status__c
+FROM SPA_Distributor__c
+WHERE lastmodifieddate >= &P_LAST_MODIFIED_DATE
 
 
 CHM_MSI_SPA_PRODUCTS_ID PK (SEQUENCE)
@@ -274,3 +322,17 @@ CREATION_DATE
 LAST_UPDATED_BY
 LAST_UPDATED_DATE
 
+
+
+<xsl:template match="/" xml:id="id_11">
+      <nstrgmpr:query xml:id="id_12">
+            <nstrgmpr:QueryParameters xml:id="id_62">
+                  <ns28:P_LAST_MODIFIED_DATE xml:id="id_63">
+                        <xsl:value-of xml:id="id_64" select="$g_last_run_date"/>
+                  </ns28:P_LAST_MODIFIED_DATE>
+            </nstrgmpr:QueryParameters>
+            <nstrgmpr:QueryLocator xml:id="id_60">
+                  <xsl:value-of xml:id="id_61" select="$L_QUERY_LOCATOR"/>
+            </nstrgmpr:QueryLocator>
+      </nstrgmpr:query>
+</xsl:template>
