@@ -1,0 +1,205 @@
+<nstrgmpr:P_IN_CHM_MSI_SPA_INSTALLERS_ITEM xml:id="id_65">
+      <nstrgmpr:ID xml:id="id_66">
+            <xsl:value-of xml:id="id_67" select="nsmpr0:Id"/>
+      </nstrgmpr:ID>
+      <nstrgmpr:IS_DELETED xml:id="id_68">
+            <xsl:value-of xml:id="id_69" select="nsmpr0:IsDeleted"/>
+      </nstrgmpr:IS_DELETED>
+      <nstrgmpr:NAME xml:id="id_70">
+            <xsl:value-of xml:id="id_71" select="nsmpr0:Name"/>
+      </nstrgmpr:NAME>
+      <nstrgmpr:CURRENCY_ISO_CODE xml:id="id_72">
+            <xsl:value-of xml:id="id_73" select="nsmpr0:CurrencyIsoCode"/>
+      </nstrgmpr:CURRENCY_ISO_CODE>
+      <nstrgmpr:SFDC_CREATED_DATE xml:id="id_74">
+            <xsl:value-of xml:id="id_75" select="nsmpr0:CreatedDate"/>
+      </nstrgmpr:SFDC_CREATED_DATE>
+      <nstrgmpr:SFDC_CREATED_BY xml:id="id_76">
+            <xsl:value-of xml:id="id_77" select="nsmpr0:CreatedById/nsmpr0:Id"/>
+      </nstrgmpr:SFDC_CREATED_BY>
+      <nstrgmpr:SFDC_LAST_UPDATE_DATE xml:id="id_78">
+            <xsl:value-of xml:id="id_79" select="nsmpr0:LastModifiedDate"/>
+      </nstrgmpr:SFDC_LAST_UPDATE_DATE>
+      <nstrgmpr:SFDC_LAST_UPDATED_BY xml:id="id_80">
+            <xsl:value-of xml:id="id_81" select="nsmpr0:LastModifiedById/nsmpr0:Id"/>
+      </nstrgmpr:SFDC_LAST_UPDATED_BY>
+      <nstrgmpr:SYSTEM_MOD_STAMP xml:id="id_82">
+            <xsl:value-of xml:id="id_83" select="nsmpr0:SystemModstamp"/>
+      </nstrgmpr:SYSTEM_MOD_STAMP>
+      <nstrgmpr:LAST_ACTIVITY_DATE xml:id="id_84">
+            <xsl:value-of xml:id="id_85" select="nsmpr0:LastActivityDate"/>
+      </nstrgmpr:LAST_ACTIVITY_DATE>
+      <nstrgmpr:LAST_VIEWED_DATE xml:id="id_86">
+            <xsl:value-of xml:id="id_87" select="nsmpr0:LastViewedDate"/>
+      </nstrgmpr:LAST_VIEWED_DATE>
+      <nstrgmpr:LAST_REFERENCED_DATE xml:id="id_88">
+            <xsl:value-of xml:id="id_89" select="nsmpr0:LastReferencedDate"/>
+      </nstrgmpr:LAST_REFERENCED_DATE>
+      <nstrgmpr:INSTALLER_NAME xml:id="id_96">
+            <xsl:value-of xml:id="id_97" select="nsmpr0:Installer_Name__c/nsmpr0:Id"/>
+      </nstrgmpr:INSTALLER_NAME>
+      <nstrgmpr:SPA xml:id="id_94">
+            <xsl:value-of xml:id="id_95" select="nsmpr0:SPA__c/nsmpr0:Id"/>
+      </nstrgmpr:SPA>
+      <nstrgmpr:STATUS xml:id="id_92">
+            <xsl:value-of xml:id="id_93" select="nsmpr0:Status__c"/>
+      </nstrgmpr:STATUS>
+      <nstrgmpr:INSTALLER_ENLIGHTEN_ID xml:id="id_90">
+            <xsl:value-of xml:id="id_91" select="nsmpr0:Installer_Enlighten_Id__c"/>
+      </nstrgmpr:INSTALLER_ENLIGHTEN_ID>
+      <nstrgmpr:OIC_INSTANCE_ID xml:id="id_98">
+            <xsl:value-of xml:id="id_99" select="$g_oic_instance_id"/>
+      </nstrgmpr:OIC_INSTANCE_ID>
+      <nstrgmpr:CREATED_BY xml:id="id_100">
+            <xsl:value-of xml:id="id_101" select="$self/nsmpr2:metadata/nsmpr2:runtime/nsmpr2:invokedBy"/>
+      </nstrgmpr:CREATED_BY>
+      <nstrgmpr:CREATION_DATE xml:id="id_104">
+            <xsl:value-of xml:id="id_105" select="fn:current-dateTime ()"/>
+      </nstrgmpr:CREATION_DATE>
+      <nstrgmpr:LAST_UPDATED_BY xml:id="id_102">
+            <xsl:value-of xml:id="id_103" select="$self/nsmpr2:metadata/nsmpr2:runtime/nsmpr2:invokedBy"/>
+      </nstrgmpr:LAST_UPDATED_BY>
+      <nstrgmpr:LAST_UPDATED_DATE xml:id="id_106">
+            <xsl:value-of xml:id="id_107" select="fn:current-dateTime ()"/>
+      </nstrgmpr:LAST_UPDATED_DATE>
+</nstrgmpr:P_IN_CHM_MSI_SPA_INSTALLERS_ITEM>
+
+
+<nstrgmpr:P_IN_CHM_MSI_SPA_DISTRIBUTORS_ITEM xml:id="id_65">
+      <nstrgmpr:ID xml:id="id_66">
+            <xsl:value-of xml:id="id_67" select="nsmpr0:Id"/>
+      </nstrgmpr:ID>
+      <nstrgmpr:IS_DELETED xml:id="id_68">
+            <xsl:value-of xml:id="id_69" select="nsmpr0:IsDeleted"/>
+      </nstrgmpr:IS_DELETED>
+      <nstrgmpr:NAME xml:id="id_70">
+            <xsl:value-of xml:id="id_71" select="nsmpr0:Name"/>
+      </nstrgmpr:NAME>
+      <nstrgmpr:CURRENCY_ISO_CODE xml:id="id_72">
+            <xsl:value-of xml:id="id_73" select="nsmpr0:CurrencyIsoCode"/>
+      </nstrgmpr:CURRENCY_ISO_CODE>
+      <nstrgmpr:SFDC_CREATED_DATE xml:id="id_74">
+            <xsl:value-of xml:id="id_75" select="nsmpr0:CreatedDate"/>
+      </nstrgmpr:SFDC_CREATED_DATE>
+      <nstrgmpr:SFDC_CREATED_BY xml:id="id_76">
+            <xsl:value-of xml:id="id_77" select="nsmpr0:CreatedById/nsmpr0:Id"/>
+      </nstrgmpr:SFDC_CREATED_BY>
+      <nstrgmpr:SFDC_LAST_UPDATE_DATE xml:id="id_78">
+            <xsl:value-of xml:id="id_79" select="nsmpr0:LastModifiedDate"/>
+      </nstrgmpr:SFDC_LAST_UPDATE_DATE>
+      <nstrgmpr:SFDC_LAST_UPDATED_BY xml:id="id_80">
+            <xsl:value-of xml:id="id_81" select="nsmpr0:LastModifiedById/nsmpr0:Id"/>
+      </nstrgmpr:SFDC_LAST_UPDATED_BY>
+      <nstrgmpr:SYSTEM_MOD_STAMP xml:id="id_82">
+            <xsl:value-of xml:id="id_83" select="nsmpr0:SystemModstamp"/>
+      </nstrgmpr:SYSTEM_MOD_STAMP>
+      <nstrgmpr:LAST_VIEWED_DATE xml:id="id_84">
+            <xsl:value-of xml:id="id_85" select="nsmpr0:LastViewedDate"/>
+      </nstrgmpr:LAST_VIEWED_DATE>
+      <nstrgmpr:LAST_REFERENCED_DATE xml:id="id_86">
+            <xsl:value-of xml:id="id_87" select="nsmpr0:LastReferencedDate"/>
+      </nstrgmpr:LAST_REFERENCED_DATE>
+      <nstrgmpr:SPA_TEST xml:id="id_139">
+            <xsl:value-of xml:id="id_140" select="nsmpr0:SPATEST__c/nsmpr0:Id"/>
+      </nstrgmpr:SPA_TEST>
+      <nstrgmpr:DISTRIBUTOR_ACCOUNT_NAME xml:id="id_96">
+            <xsl:value-of xml:id="id_97" select="nsmpr0:Distributor_Account__c/nsmpr0:Id"/>
+      </nstrgmpr:DISTRIBUTOR_ACCOUNT_NAME>
+      <nstrgmpr:SPA_STATUS xml:id="id_94">
+            <xsl:value-of xml:id="id_95" select="nsmpr0:SPA_Status__c"/>
+      </nstrgmpr:SPA_STATUS>
+      <nstrgmpr:ORACLE_CUSTOMER_NUMBER xml:id="id_90">
+            <xsl:value-of xml:id="id_91" select="nsmpr0:Oracle_Customer_Number__c"/>
+      </nstrgmpr:ORACLE_CUSTOMER_NUMBER>
+      <nstrgmpr:SPA_AND_OPPORTUNITIES xml:id="id_88">
+            <xsl:value-of xml:id="id_89" select="nsmpr0:SPA_and_Opportunities__c"/>
+      </nstrgmpr:SPA_AND_OPPORTUNITIES>
+      <nstrgmpr:LINE_STATUS xml:id="id_92">
+            <xsl:value-of xml:id="id_93" select="nsmpr0:Line_Status__c"/>
+      </nstrgmpr:LINE_STATUS>
+      <nstrgmpr:CREATED_BY xml:id="id_198">
+            <xsl:value-of xml:id="id_199" select="$self/nsmpr2:metadata/nsmpr2:runtime/nsmpr2:invokedBy"/>
+      </nstrgmpr:CREATED_BY>
+      <nstrgmpr:CREATION_DATE xml:id="id_192">
+            <xsl:value-of xml:id="id_193" select="fn:current-dateTime ()"/>
+      </nstrgmpr:CREATION_DATE>
+      <nstrgmpr:LAST_UPDATED_BY xml:id="id_196">
+            <xsl:value-of xml:id="id_197" select="$self/nsmpr2:metadata/nsmpr2:runtime/nsmpr2:invokedBy"/>
+      </nstrgmpr:LAST_UPDATED_BY>
+      <nstrgmpr:LAST_UPDATED_DATE xml:id="id_194">
+            <xsl:value-of xml:id="id_195" select="fn:current-dateTime ()"/>
+      </nstrgmpr:LAST_UPDATED_DATE>
+      <nstrgmpr:OIC_INSTANCE_ID xml:id="id_200">
+            <xsl:value-of xml:id="id_201" select="$g_oic_instance_id"/>
+      </nstrgmpr:OIC_INSTANCE_ID>
+</nstrgmpr:P_IN_CHM_MSI_SPA_DISTRIBUTORS_ITEM>
+
+
+<nstrgmpr:P_IN_CHM_MSI_SPA_GEO_DETAILS_ITEM xml:id="id_87">
+      <nstrgmpr:ID xml:id="id_88">
+            <xsl:value-of xml:id="id_89" select="nsmpr0:Id"/>
+      </nstrgmpr:ID>
+      <nstrgmpr:IS_DELETED xml:id="id_90">
+            <xsl:value-of xml:id="id_91" select="nsmpr0:IsDeleted"/>
+      </nstrgmpr:IS_DELETED>
+      <nstrgmpr:NAME xml:id="id_92">
+            <xsl:value-of xml:id="id_93" select="nsmpr0:Name"/>
+      </nstrgmpr:NAME>
+      <nstrgmpr:CURRENCY_ISO_CODE xml:id="id_94">
+            <xsl:value-of xml:id="id_95" select="nsmpr0:CurrencyIsoCode"/>
+      </nstrgmpr:CURRENCY_ISO_CODE>
+      <nstrgmpr:SFDC_CREATED_DATE xml:id="id_96">
+            <xsl:value-of xml:id="id_97" select="nsmpr0:CreatedDate"/>
+      </nstrgmpr:SFDC_CREATED_DATE>
+      <nstrgmpr:SFDC_CREATED_BY xml:id="id_98">
+            <xsl:value-of xml:id="id_99" select="nsmpr0:CreatedById/nsmpr0:Id"/>
+      </nstrgmpr:SFDC_CREATED_BY>
+      <nstrgmpr:SFDC_LAST_UPDATE_DATE xml:id="id_100">
+            <xsl:value-of xml:id="id_101" select="nsmpr0:LastModifiedDate"/>
+      </nstrgmpr:SFDC_LAST_UPDATE_DATE>
+      <nstrgmpr:SFDC_LAST_UPDATED_BY xml:id="id_102">
+            <xsl:value-of xml:id="id_103" select="nsmpr0:LastModifiedById/nsmpr0:Id"/>
+      </nstrgmpr:SFDC_LAST_UPDATED_BY>
+      <nstrgmpr:SYSTEM_MOD_STAMP xml:id="id_104">
+            <xsl:value-of xml:id="id_105" select="nsmpr0:SystemModstamp"/>
+      </nstrgmpr:SYSTEM_MOD_STAMP>
+      <nstrgmpr:LAST_VIEWED_DATE xml:id="id_106">
+            <xsl:value-of xml:id="id_107" select="nsmpr0:LastViewedDate"/>
+      </nstrgmpr:LAST_VIEWED_DATE>
+      <nstrgmpr:LAST_REFERENCED_DATE xml:id="id_108">
+            <xsl:value-of xml:id="id_109" select="nsmpr0:LastReferencedDate"/>
+      </nstrgmpr:LAST_REFERENCED_DATE>
+      <nstrgmpr:LAST_ACTIVITY_DATE xml:id="id_110">
+            <xsl:value-of xml:id="id_111" select="nsmpr0:LastActivityDate"/>
+      </nstrgmpr:LAST_ACTIVITY_DATE>
+      <nstrgmpr:COUNTRY xml:id="id_112">
+            <xsl:value-of xml:id="id_113" select="nsmpr0:Country__c"/>
+      </nstrgmpr:COUNTRY>
+      <nstrgmpr:ZIP xml:id="id_114">
+            <xsl:value-of xml:id="id_115" select="nsmpr0:Zip_code__c"/>
+      </nstrgmpr:ZIP>
+      <nstrgmpr:STATUS xml:id="id_116">
+            <xsl:value-of xml:id="id_117" select="nsmpr0:Status__c"/>
+      </nstrgmpr:STATUS>
+      <nstrgmpr:STATE xml:id="id_118">
+            <xsl:value-of xml:id="id_119" select="nsmpr0:State__c"/>
+      </nstrgmpr:STATE>
+      <nstrgmpr:SPA xml:id="id_120">
+            <xsl:value-of xml:id="id_121" select="nsmpr0:SPA__c/nsmpr0:Id"/>
+      </nstrgmpr:SPA>
+      <nstrgmpr:CREATED_BY xml:id="id_124">
+            <xsl:value-of xml:id="id_125" select="$self/nsmpr4:metadata/nsmpr4:runtime/nsmpr4:invokedBy"/>
+      </nstrgmpr:CREATED_BY>
+      <nstrgmpr:CREATION_DATE xml:id="id_128">
+            <xsl:value-of xml:id="id_129" select="fn:current-dateTime ()"/>
+      </nstrgmpr:CREATION_DATE>
+      <nstrgmpr:LAST_UPDATED_BY xml:id="id_126">
+            <xsl:value-of xml:id="id_127" select="$self/nsmpr4:metadata/nsmpr4:runtime/nsmpr4:invokedBy"/>
+      </nstrgmpr:LAST_UPDATED_BY>
+      <nstrgmpr:LAST_UPDATED_DATE xml:id="id_130">
+            <xsl:value-of xml:id="id_131" select="fn:current-dateTime ()"/>
+      </nstrgmpr:LAST_UPDATED_DATE>
+      <nstrgmpr:OIC_INSTANCE_ID xml:id="id_122">
+            <xsl:value-of xml:id="id_123" select="$g_oic_instance_id"/>
+      </nstrgmpr:OIC_INSTANCE_ID>
+</nstrgmpr:P_IN_CHM_MSI_SPA_GEO_DETAILS_ITEM>

@@ -213,9 +213,9 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
@@ -646,78 +646,15 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
     END MERGE_SPA_GEO_DETAILS_DATA;
 
 
-    --Procedure to update integration run table   
-    PROCEDURE FINISH_INTEGRATION_RUN (
-         P_IN_OIC_INSTANCE_ID       IN VARCHAR2
-        ,P_OUT_DATA                 OUT    SYS_REFCURSOR
-    )
-    AS
-    BEGIN
-        
-        UPDATE CHM_INTEGRATION_RUNS
-        SET 
-             PHASE                  = 'Completed'
-            ,STATUS                 = 'Success'
-            ,LAST_COMPLETED_STAGE   = 'Data Merge'
-            ,LOG                    = LOG || CHR(10) ||'Integration completed successfully'
-            ,LAST_UPDATE_DATE       = SYSDATE
-            ,COMPLETION_DATE        = SYSDATE
-        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
-        COMMIT;
-        
-        UPDATE CHM_INTEGRATIONS
-        SET 
-             LAST_RUN_STATUS        = 'Success'
-        WHERE LAST_RUN_ID = P_IN_OIC_INSTANCE_ID;
-        COMMIT;
-        
-        OPEN P_OUT_DATA FOR
-        SELECT NVL(TOTAL_SUCCESS_RECORDS,0) TOTAL_SUCCESS_RECORDS, NVL(TOTAL_ERROR_RECORDS,0) TOTAL_ERROR_RECORDS, NVL(TOTAL_FETCHED_RECORDS,0) TOTAL_FETCHED_RECORDS
-        FROM CHM_INTEGRATION_RUNS 
-        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
-        
-    END FINISH_INTEGRATION_RUN;
     
-    --Procedure to update log
-    PROCEDURE UPDATE_LOG (
-         P_IN_LOG                IN VARCHAR2
-        ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    )
-    AS
-    
-    BEGIN
-        UPDATE CHM_INTEGRATION_RUNS
-        SET 
-             LOG                        = LOG || CHR(10) || P_IN_LOG
-            ,LAST_UPDATE_DATE           = SYSDATE
-        WHERE CHM_INTEGRATION_RUN_ID    = P_IN_OIC_INSTANCE_ID;
-        COMMIT;
-    END UPDATE_LOG;
-    
-    --Procedure to check if any record failed
-    PROCEDURE CHECK_FAILED_RECORDS (
-        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    )
-    AS
-        L_COUNT NUMBER;
-    BEGIN
-        SELECT NVL(TOTAL_ERROR_RECORDS,0) INTO L_COUNT
-        FROM CHM_INTEGRATION_RUNS
-        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
-        
-        IF L_COUNT > 0 THEN
-            RAISE_APPLICATION_ERROR(-20001, 'Few Records failed to merge');
-        END IF;
-        
-    END CHECK_FAILED_RECORDS;
 
 END CHM_MSI_SPA_DIST_INSTALLER_PKG;

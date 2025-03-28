@@ -156,26 +156,7 @@ AS
          P_IN_CHM_MSI_SPA_GEO_DETAILS   IN TBL_CHM_MSI_SPA_GEO_DETAILS
         ,P_IN_OIC_INSTANCE_ID           IN VARCHAR2
     );
-    
-    
-    --Procedure to update integration run table   
-    PROCEDURE FINISH_INTEGRATION_RUN (
-         P_IN_OIC_INSTANCE_ID       IN VARCHAR2
-        ,P_OUT_DATA                 OUT    SYS_REFCURSOR
-    );
-    
-    
-    --Procedure to update log
-    PROCEDURE UPDATE_LOG (
-         P_IN_LOG                IN VARCHAR2
-        ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    );
-    
-    
-    --Procedure to check if any record failed
-    PROCEDURE CHECK_FAILED_RECORDS (
-        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    );
-    
+        
+        
 END CHM_MSI_SPA_DIST_INSTALLER_PKG;
 /
