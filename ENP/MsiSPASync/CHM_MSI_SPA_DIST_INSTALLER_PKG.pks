@@ -62,6 +62,7 @@ AS
     
     TYPE REC_CHM_MSI_SPA_DISTRIBUTORS IS RECORD (
          ID                              VARCHAR2(4000)              
+        ,DISTRIBUTOR_ACCOUNT_ID          VARCHAR2(4000)              
         ,IS_DELETED                      VARCHAR2(4000)              
         ,NAME                            VARCHAR2(4000)              
         ,CURRENCY_ISO_CODE               VARCHAR2(4000)              
