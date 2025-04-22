@@ -1,0 +1,82 @@
+<xsl:template match="/" xml:id="id_11">
+<nstrgmpr:InputParameters xml:id="id_12">
+    <nstrgmpr:P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM xml:id="id_89">
+          <xsl:for-each xml:id="id_91" select="$GetSystemSizeIncentiveDetail/nsmpr4:queryResponse/nsmpr4:QueryResults/nsmpr4:records">
+                <nstrgmpr:P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM_ITEM xml:id="id_92">
+                      <nstrgmpr:ID xml:id="id_277">
+                            <xsl:value-of xml:id="id_278" select="nsmpr4:Id"/>
+                      </nstrgmpr:ID>
+                      <nstrgmpr:TIER_NAME xml:id="id_107">
+                            <xsl:value-of xml:id="id_108" select="nsmpr4:Tier_Name__c"/>
+                      </nstrgmpr:TIER_NAME>
+                      <nstrgmpr:MIN_QTY xml:id="id_109">
+                            <xsl:value-of xml:id="id_110" select="nsmpr4:Min_Qty__c"/>
+                      </nstrgmpr:MIN_QTY>
+                      <nstrgmpr:MAX_QTY xml:id="id_111">
+                            <xsl:value-of xml:id="id_112" select="nsmpr4:Max_Qty__c"/>
+                      </nstrgmpr:MAX_QTY>
+                      <nstrgmpr:SFDC_CREATED_DATE xml:id="id_113">
+                            <xsl:value-of xml:id="id_114" select="nsmpr4:CreatedDate"/>
+                      </nstrgmpr:SFDC_CREATED_DATE>
+                      <nstrgmpr:SFDC_LAST_UPDATE_DATE xml:id="id_201">
+                            <xsl:value-of xml:id="id_202" select="nsmpr4:LastModifiedDate"/>
+                      </nstrgmpr:SFDC_LAST_UPDATE_DATE>
+                      <nstrgmpr:SFDC_CREATED_BY xml:id="id_203">
+                            <xsl:value-of xml:id="id_204" select="nsmpr4:CreatedById"/>
+                      </nstrgmpr:SFDC_CREATED_BY>
+                      <nstrgmpr:SFDC_LAST_UPDATED_BY xml:id="id_199">
+                            <xsl:value-of xml:id="id_200" select="nsmpr4:LastModifiedById"/>
+                      </nstrgmpr:SFDC_LAST_UPDATED_BY>
+                      <nstrgmpr:CREATED_BY xml:id="id_279">
+                            <xsl:value-of xml:id="id_280" select="$self/nsmpr6:metadata/nsmpr6:runtime/nsmpr6:invokedBy"/>
+                      </nstrgmpr:CREATED_BY>
+                      <nstrgmpr:CREATION_DATE xml:id="id_281">
+                            <xsl:value-of xml:id="id_285" select="fn:current-dateTime ()"/>
+                      </nstrgmpr:CREATION_DATE>
+                      <nstrgmpr:LAST_UPDATED_BY xml:id="id_283">
+                            <xsl:value-of xml:id="id_284" select="$self/nsmpr6:metadata/nsmpr6:runtime/nsmpr6:invokedBy"/>
+                      </nstrgmpr:LAST_UPDATED_BY>
+                      <nstrgmpr:LAST_UPDATED_DATE xml:id="id_115">
+                            <xsl:value-of xml:id="id_286" select="fn:current-dateTime ()"/>
+                      </nstrgmpr:LAST_UPDATED_DATE>
+                      <nstrgmpr:OIC_INSTANCE_ID xml:id="id_117">
+                            <xsl:value-of xml:id="id_118" select="$self/nsmpr6:metadata/nsmpr6:runtime/nsmpr6:instanceId"/>
+                      </nstrgmpr:OIC_INSTANCE_ID>
+                      <nstrgmpr:IS_DELETED xml:id="id_105">
+                            <xsl:value-of xml:id="id_106" select="nsmpr4:IsDeleted"/>
+                      </nstrgmpr:IS_DELETED>
+                      <nstrgmpr:NAME xml:id="id_197">
+                            <xsl:value-of xml:id="id_198" select="nsmpr4:Name"/>
+                      </nstrgmpr:NAME>
+                      <nstrgmpr:CURRENCY_ISO_CODE xml:id="id_97">
+                            <xsl:value-of xml:id="id_98" select="nsmpr4:CurrencyIsoCode"/>
+                      </nstrgmpr:CURRENCY_ISO_CODE>
+                      <nstrgmpr:SYSTEM_MOD_STAMP xml:id="id_99">
+                            <xsl:value-of xml:id="id_100" select="nsmpr4:SystemModstamp"/>
+                      </nstrgmpr:SYSTEM_MOD_STAMP>
+                      <nstrgmpr:LAST_ACTIVITY_DATE xml:id="id_101">
+                            <xsl:value-of xml:id="id_102" select="nsmpr4:LastActivityDate"/>
+                      </nstrgmpr:LAST_ACTIVITY_DATE>
+                      <nstrgmpr:LAST_VIEWED_DATE xml:id="id_93">
+                            <xsl:value-of xml:id="id_94" select="nsmpr4:LastViewedDate"/>
+                      </nstrgmpr:LAST_VIEWED_DATE>
+                      <nstrgmpr:LAST_REFERENCED_DATE xml:id="id_95">
+                            <xsl:value-of xml:id="id_96" select="nsmpr4:LastReferencedDate"/>
+                      </nstrgmpr:LAST_REFERENCED_DATE>
+                      <nstrgmpr:SPA xml:id="id_195">
+                            <xsl:value-of xml:id="id_196" select="nsmpr4:SPA__c"/>
+                      </nstrgmpr:SPA>
+                      <nstrgmpr:TIER_INCENTIVE xml:id="id_193">
+                            <xsl:value-of xml:id="id_194" select="nsmpr4:Tier_Incentive__c"/>
+                      </nstrgmpr:TIER_INCENTIVE>
+                      <nstrgmpr:PRODUCT xml:id="id_103">
+                            <xsl:value-of xml:id="id_104" select="nsmpr4:Product__c"/>
+                      </nstrgmpr:PRODUCT>
+                </nstrgmpr:P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM_ITEM>
+          </xsl:for-each>
+    </nstrgmpr:P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM>
+    <nstrgmpr:P_IN_OIC_INSTANCE_ID xml:id="id_119">
+          <xsl:value-of xml:id="id_120" select="$self/nsmpr6:metadata/nsmpr6:runtime/nsmpr6:instanceId"/>
+    </nstrgmpr:P_IN_OIC_INSTANCE_ID>
+</nstrgmpr:InputParameters>
+</xsl:template>

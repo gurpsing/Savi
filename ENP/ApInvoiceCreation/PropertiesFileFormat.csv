@@ -1,0 +1,2 @@
+JobPackageName,JobName,ZipPrefix,Attribute1,BusinessUnit,Attribute3,AccountingDate,Hold,HoldReason,Attribute7,Source,ImportSet,Purge,SummarizeReport,Ledger,ImportGroup,NumOfParallelProcesses
+/oracle/apps/ess/financials/payables/invoices/transactions,APXIIMPT,APInvoice,,ENE NLD Business Unit,N,2025-04-10,,,1000,MSI,,N,Y,ENE NLD Primary,,1

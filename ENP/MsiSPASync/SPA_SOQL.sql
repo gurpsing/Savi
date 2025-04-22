@@ -142,6 +142,7 @@ SELECT Id
 	,System_size_count__c
 FROM Quote
 WHERE lastmodifieddate >= &LastModifiedDate
+and status in ('Approved')
 AND special_pricing_type__c IN (
 		'MSI Installer'
 		)
@@ -150,23 +151,23 @@ AND special_pricing_type__c IN (
 --System Attachment (On SPA Level)     CHM_MSI_SPA_SYSTEM_ATTACHMENT_INCENTIVES -> CHM_MSI_SPA_SYSTEM_ATTACHMENTS
 -------------------------------------------------------------------------------------------------------------
 SELECT Id
-	,IsDeleted
-	,Name
-	,CurrencyIsoCode
-	,CreatedDate
-	,CreatedById
-	,LastModifiedDate
-	,LastModifiedById
-	,SystemModstamp
-	,LastActivityDate
-	,LastViewedDate
-	,LastReferencedDate
-	,Min_Quantity__c
-	,Per_Unit_Incentive__c
-	,SPA__c
-	,Unique_key__c
-	,Status__c
-	,Product__c
+,IsDeleted
+,Name
+,CurrencyIsoCode
+,CreatedDate
+,CreatedById
+,LastModifiedDate
+,LastModifiedById
+,SystemModstamp
+,LastActivityDate
+,LastViewedDate
+,LastReferencedDate
+,Min_Quantity__c
+,Per_Unit_Incentive__c
+,SPA__c
+,Unique_key__c
+,Status__c
+,Product__c
 FROM SPA_MSI_System_Attachment__c
 WHERE lastmodifieddate >= &LastModifiedDate
 
@@ -174,23 +175,23 @@ WHERE lastmodifieddate >= &LastModifiedDate
 --Unit Activation   (On SPA Level)   CHM_MSI_SPA_UNIT_ACTIVATION_INCENTIVES -> CHM_MSI_SPA_UNIT_ACTIVATIONS
 -------------------------------------------------------------------------------------------------------------
 SELECT Id
-	,IsDeleted
-	,Name
-	,CurrencyIsoCode
-	,CreatedDate
-	,CreatedById
-	,LastModifiedDate
-	,LastModifiedById
-	,SystemModstamp
-	,LastActivityDate
-	,LastViewedDate
-	,LastReferencedDate
-	,Status__c
-	,SPA__c
-	,Min_Quantity__c
-	,Per_Unit_Incentive__c
-	,Product__c
-	,Unique_key__c
+,IsDeleted
+,Name
+,CurrencyIsoCode
+,CreatedDate
+,CreatedById
+,LastModifiedDate
+,LastModifiedById
+,SystemModstamp
+,LastActivityDate
+,LastViewedDate
+,LastReferencedDate
+,Status__c
+,SPA__c
+,Min_Quantity__c
+,Per_Unit_Incentive__c
+,Product__c
+,Unique_key__c
 from SPA_MSI_Unit_Activation__c 
 WHERE lastmodifieddate >= &LastModifiedDate
 
@@ -199,26 +200,26 @@ WHERE lastmodifieddate >= &LastModifiedDate
 --System Size Incentive  (On SPA Level)  CHM_MSI_SPA_SYSTEM_SIZE_INCENTIVES_AUDIT   -> CHM_MSI_SPA_SYSTEM_SIZE_AUDIT     (System Size)
 -------------------------------------------------------------------------------------------------------------
 SELECT Id
-	,IsDeleted
-	,Name
-	,CurrencyIsoCode
-	,CreatedDate
-	,CreatedById
-	,LastModifiedDate
-	,LastModifiedById
-	,SystemModstamp
-	,LastActivityDate
-	,LastViewedDate
-	,LastReferencedDate
-	,SPA__c
-	,Tier_1_Incentive__c
-	,Tier_2_Incentive__c
-	,Tier_3_Incentive__c
-	,Tier_4_Incentive__c
-	,Tier_5_Incentive__c
-	,Unique_key__c
-	,Status__c
-	,Product__c
+,IsDeleted
+,Name
+,CurrencyIsoCode
+,CreatedDate
+,CreatedById
+,LastModifiedDate
+,LastModifiedById
+,SystemModstamp
+,LastActivityDate
+,LastViewedDate
+,LastReferencedDate
+,SPA__c
+,Tier_1_Incentive__c
+,Tier_2_Incentive__c
+,Tier_3_Incentive__c
+,Tier_4_Incentive__c
+,Tier_5_Incentive__c
+,Unique_key__c
+,Status__c
+,Product__c
 from SPA_MSI_System_Size_Incentive__c 
 WHERE lastmodifieddate >= &LastModifiedDate
  

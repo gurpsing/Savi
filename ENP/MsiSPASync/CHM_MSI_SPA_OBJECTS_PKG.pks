@@ -115,8 +115,8 @@ AS
     TYPE REC_CHM_MSI_SYS_SIZE_INCENTIVE IS RECORD (                    
          ID                            VARCHAR2(4000)              
         ,TIER1_REBATE_AMOUNT           NUMBER                      
-        ,TIER2_REABTE_AMOUNT           NUMBER                      
-        ,TIER3_REABTE_AMOUNT           NUMBER                      
+        ,TIER2_REBATE_AMOUNT           NUMBER                      
+        ,TIER3_REBATE_AMOUNT           NUMBER                      
         ,TIER4_REBATE_AMOUNT           NUMBER                      
         ,TIER5_REBATE_AMOUNT           NUMBER                      
         ,STATUS                        VARCHAR2(4000)              

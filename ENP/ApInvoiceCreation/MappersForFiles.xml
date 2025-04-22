@@ -1,0 +1,173 @@
+<xsl:template match="/" xml:id="id_11">
+              <nstrgmpr:Write xml:id="id_12">
+                    <ns24:EachInvoice xml:id="id_59">
+                          <ns24:Invoice xml:id="id_1029">
+                                <ns24:Invoice_ID xml:id="id_1030">
+                                      <xsl:value-of xml:id="id_1031" select="$forEachInvoice/nsmpr0:GetInvoiceDetailsOutput/nsmpr0:ORACLE_AP_INVOICE_ID"/>
+                                </ns24:Invoice_ID>
+                                <ns24:Business_Unit xml:id="id_1039">
+                                      <xsl:value-of xml:id="id_1215" select="&quot;ENE NLD Business Unit&quot;"/>
+                                </ns24:Business_Unit>
+                                <ns24:Source xml:id="id_1038">
+                                      <xsl:value-of xml:id="id_1040" select="$G_Source"/>
+                                </ns24:Source>
+                                <ns24:Invoice_Number xml:id="id_1032">
+                                      <xsl:value-of xml:id="id_1033" select="$forEachInvoice/nsmpr0:GetInvoiceDetailsOutput/nsmpr0:ORACLE_AP_INVOICE_NUMBER"/>
+                                </ns24:Invoice_Number>
+                                <ns24:Invoice_Amount xml:id="id_1034">
+                                      <xsl:value-of xml:id="id_1035" select="$forEachInvoice/nsmpr0:GetInvoiceDetailsOutput/nsmpr0:INVOICE_AMOUNT"/>
+                                </ns24:Invoice_Amount>
+                                <ns24:Invoice_Date xml:id="id_1036">
+                                      <xsl:value-of xml:id="id_1037" select="string (xp20:format-dateTime ($forEachInvoice/nsmpr0:GetInvoiceDetailsOutput/nsmpr0:INVOICE_DATE, &quot;[Y0001]/M[01]/D[01]&quot; ) )"/>
+                                </ns24:Invoice_Date>
+                                <ns24:Invoice_Currency xml:id="id_1042">
+                                      <xsl:value-of xml:id="id_1043" select="$forEachInvoice/nsmpr0:GetInvoiceDetailsOutput/nsmpr0:INVOICE_CURRENCY"/>
+                                </ns24:Invoice_Currency>
+                                <ns24:Description xml:id="id_1044">
+                                      <xsl:value-of xml:id="id_1045" select="$G_Description"/>
+                                </ns24:Description>
+                                <ns24:Invoice_Type xml:id="id_1046">
+                                      <xsl:value-of xml:id="id_1047" select="$G_Invoice_Type"/>
+                                </ns24:Invoice_Type>
+                                <ns24:Payment_Terms xml:id="id_1048">
+                                      <xsl:value-of xml:id="id_1049" select="$G_Payment_Terms"/>
+                                </ns24:Payment_Terms>
+                                <ns24:Payment_Method xml:id="id_1050">
+                                      <xsl:value-of xml:id="id_1051" select="'E_WIRE'"/>
+                                </ns24:Payment_Method>
+                          </ns24:Invoice>
+                    </ns24:EachInvoice>
+              </nstrgmpr:Write>
+        </xsl:template>
+        
+        
+        
+---------------------------------------LINES------------------------
+
+<xsl:template match="/" xml:id="id_11">
+              <nstrgmpr:Write xml:id="id_12">
+                    <ns30:EachInvoiceLines xml:id="id_69">
+                          <ns30:InvoiceLines xml:id="id_1065">
+                                <ns30:Invoice_ID xml:id="id_1150">
+                                      <xsl:value-of xml:id="id_1151" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ORACLE_AP_INVOICE_ID"/>
+                                </ns30:Invoice_ID>
+                                <ns30:Line_Number xml:id="id_1152">
+                                      <xsl:value-of xml:id="id_1153" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:Invoice_Line_Number"/>
+                                </ns30:Line_Number>
+                                <ns30:Line_Type xml:id="id_1154">
+                                      <xsl:value-of xml:id="id_1155" select="$G_Line_Type"/>
+                                </ns30:Line_Type>
+                                <ns30:Amount xml:id="id_1156">
+                                      <xsl:value-of xml:id="id_1157" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:TOTAL_AMOUNT"/>
+                                </ns30:Amount>
+                                <ns30:Invoice_Quantity xml:id="id_1158">
+                                      <xsl:value-of xml:id="id_1159" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:Quantity"/>
+                                </ns30:Invoice_Quantity>
+                                <ns30:Unit_Price xml:id="id_1160">
+                                      <xsl:value-of xml:id="id_1161" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:TOTAL_AMOUNT div $forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:Quantity"/>
+                                </ns30:Unit_Price>
+                                <ns30:Description xml:id="id_1162">
+                                      <xsl:value-of xml:id="id_1163" select="concat ($forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:REBATE_TYPE, &quot;|&quot;, $forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:DEVICE_ITEM_NUMBER )"/>
+                                </ns30:Description>
+                                <ns30:Distribution_Combination xml:id="id_1148">
+                                      <xsl:value-of xml:id="id_1149" select="concat ($GetDistCombination/nsmpr7:executeResponse/ns39:response-wrapper/ns39:items[(ns39:LookupCode = $forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:COUNTRY)]/ns39:Tag, &quot;.0000.213000.000.00000.A00.000.0000&quot; )"/>
+                                </ns30:Distribution_Combination>
+                                <ns30:Product_Type xml:id="id_1164">
+                                      <xsl:value-of xml:id="id_1165" select="$G_Product_Type"/>
+                                </ns30:Product_Type>
+                                <ns30:Line_Group_Number xml:id="id_1166">
+                                      <xsl:value-of xml:id="id_1167" select="1"/>
+                                </ns30:Line_Group_Number>
+                                <ns30:Attribute_Category xml:id="id_1168">
+                                      <xsl:value-of xml:id="id_1169" select="$G_Attribute_Category"/>
+                                </ns30:Attribute_Category>
+                                <ns30:Attribute_1 xml:id="id_1170">
+                                      <xsl:value-of xml:id="id_1171" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE1"/>
+                                </ns30:Attribute_1>
+                                <ns30:Attribute_2 xml:id="id_1172">
+                                      <xsl:value-of xml:id="id_1173" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE2"/>
+                                </ns30:Attribute_2>
+                                <ns30:Attribute_3 xml:id="id_1174">
+                                      <xsl:value-of xml:id="id_1175" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE3"/>
+                                </ns30:Attribute_3>
+                                <ns30:Attribute_4 xml:id="id_1176">
+                                      <xsl:value-of xml:id="id_1177" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE4"/>
+                                </ns30:Attribute_4>
+                                <ns30:Attribute_5 xml:id="id_1178">
+                                      <xsl:value-of xml:id="id_1179" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE5"/>
+                                </ns30:Attribute_5>
+                                <ns30:Attribute_6 xml:id="id_1180">
+                                      <xsl:value-of xml:id="id_1181" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE6"/>
+                                </ns30:Attribute_6>
+                                <ns30:Attribute_7 xml:id="id_1182">
+                                      <xsl:value-of xml:id="id_1183" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE7"/>
+                                </ns30:Attribute_7>
+                                <ns30:Attribute_8 xml:id="id_1184">
+                                      <xsl:value-of xml:id="id_1185" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE8"/>
+                                </ns30:Attribute_8>
+                                <ns30:Attribute_9 xml:id="id_1186">
+                                      <xsl:value-of xml:id="id_1187" select="$forEachInvoiceLine/nsmpr5:GetInvoiceLinesDetailsOutput/nsmpr5:ATTRIBUTE9"/>
+                                </ns30:Attribute_9>
+                          </ns30:InvoiceLines>
+                    </ns30:EachInvoiceLines>
+              </nstrgmpr:Write>
+        </xsl:template>
+        
+        
+---------------------------------------Property File------------------------
+
+<ns33:EachProperty xml:id="id_79">
+      <ns33:Properties xml:id="id_80">
+            <ns33:C1 xml:id="id_596">
+                  <xsl:value-of xml:id="id_597" select="'/oracle/apps/ess/financials/payables/invoices/transactions/'"/>
+            </ns33:C1>
+            <ns33:C2 xml:id="id_598">
+                  <xsl:value-of xml:id="id_599" select="'APXIIMPT'"/>
+            </ns33:C2>
+            <ns33:C3 xml:id="id_600">
+                  <xsl:value-of xml:id="id_601" select="'AP_INV'"/>
+            </ns33:C3>
+            <ns33:C4 xml:id="id_602">
+                  <xsl:value-of xml:id="id_603" select="'#NULL'"/>
+            </ns33:C4>
+            <ns33:C5 xml:id="id_604">
+                  <xsl:value-of xml:id="id_605" select="'#NULL'"/>
+            </ns33:C5>
+            <ns33:C6 xml:id="id_606">
+                  <xsl:value-of xml:id="id_607" select="'N'"/>
+            </ns33:C6>
+            <ns33:C7 xml:id="id_608">
+                  <xsl:value-of xml:id="id_609" select="'#NULL'"/>
+            </ns33:C7>
+            <ns33:C8 xml:id="id_610">
+                  <xsl:value-of xml:id="id_611" select="'#NULL'"/>
+            </ns33:C8>
+            <ns33:C9 xml:id="id_612">
+                  <xsl:value-of xml:id="id_613" select="'#NULL'"/>
+            </ns33:C9>
+            <ns33:C10 xml:id="id_614">
+                  <xsl:value-of xml:id="id_615" select="number (1000 )"/>
+            </ns33:C10>
+            <ns33:C11 xml:id="id_616">
+                  <xsl:value-of xml:id="id_617" select="'MSI'"/>
+            </ns33:C11>
+            <ns33:C12 xml:id="id_618">
+                  <xsl:value-of xml:id="id_619" select="'#NULL'"/>
+            </ns33:C12>
+            <ns33:C13 xml:id="id_620">
+                  <xsl:value-of xml:id="id_621" select="'N'"/>
+            </ns33:C13>
+            <ns33:C14 xml:id="id_622">
+                  <xsl:value-of xml:id="id_623" select="'N'"/>
+            </ns33:C14>
+            <ns33:C15 xml:id="id_624">
+                  <xsl:value-of xml:id="id_625" select="number (1 )"/>
+            </ns33:C15>
+            <ns33:C16 xml:id="id_626">
+                  <xsl:value-of xml:id="id_627" select="'ENE NLD Business Unit'"/>
+            </ns33:C16>
+            <ns33:C17 xml:id="id_628">
+                  <xsl:value-of xml:id="id_629" select="'#NULL'"/>
+            </ns33:C17>
+      </ns33:Properties>
+</ns33:EachProperty>

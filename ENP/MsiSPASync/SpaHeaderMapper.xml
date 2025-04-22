@@ -1,0 +1,166 @@
+<xsl:template match="/" xml:id="id_11">
+  <nstrgmpr:InputParameters xml:id="id_12">
+        <nstrgmpr:P_IN_CHM_MSI_SPA_HEADER xml:id="id_90">
+              <xsl:for-each xml:id="id_468" select="$GetSPAHeaderDetails/nsmpr0:queryResponse/nsmpr0:QueryResults/nsmpr0:records">
+                    <nstrgmpr:P_IN_CHM_MSI_SPA_HEADER_ITEM xml:id="id_91">
+                          <nstrgmpr:SPA_NUMBER xml:id="id_116">
+                                <xsl:value-of xml:id="id_117" select="nsmpr0:QuoteNumber"/>
+                          </nstrgmpr:SPA_NUMBER>
+                          <nstrgmpr:OPPORTUNITY_OWNER xml:id="id_104">
+                                <xsl:value-of xml:id="id_320" select="nsmpr0:OwnerId"/>
+                          </nstrgmpr:OPPORTUNITY_OWNER>
+                          <nstrgmpr:INSTALLER_ACCOUNT_NAME xml:id="id_631">
+                                <xsl:value-of xml:id="id_632" select="nsmpr0:Account/nsmpr0:Name"/>
+                          </nstrgmpr:INSTALLER_ACCOUNT_NAME>
+                          <nstrgmpr:INSTALLER_CUSTOMER_KEY xml:id="id_633">
+                                <xsl:value-of xml:id="id_634" select="nsmpr0:Account/nsmpr0:Customer_Key__c"/>
+                          </nstrgmpr:INSTALLER_CUSTOMER_KEY>
+                          <nstrgmpr:PRIMARY_PARTNER xml:id="id_635">
+                                <xsl:value-of xml:id="id_636" select="nsmpr0:Opportunity"/>
+                          </nstrgmpr:PRIMARY_PARTNER>
+                          <nstrgmpr:SPA_NAME xml:id="id_118">
+                                <xsl:value-of xml:id="id_119" select="nsmpr0:Name"/>
+                          </nstrgmpr:SPA_NAME>
+                          <nstrgmpr:GEOGRAPHY xml:id="id_676">
+                                <xsl:value-of xml:id="id_677" select="nsmpr0:Opportunity/nsmpr0:Geography__c"/>
+                          </nstrgmpr:GEOGRAPHY>
+                          <nstrgmpr:STAGE xml:id="id_637">
+                                <xsl:value-of xml:id="id_638" select="nsmpr0:Opportunity/nsmpr0:StageName"/>
+                          </nstrgmpr:STAGE>
+                          <nstrgmpr:OPPORTUNITY_NAME xml:id="id_678">
+                                <xsl:value-of xml:id="id_679" select="nsmpr0:Opportunity/nsmpr0:Name"/>
+                          </nstrgmpr:OPPORTUNITY_NAME>
+                          <nstrgmpr:DEAL_LOGISTICS xml:id="id_717">
+                                <xsl:value-of xml:id="id_718" select="nsmpr0:Opportunity/nsmpr0:Opportunity_Logistics__c"/>
+                          </nstrgmpr:DEAL_LOGISTICS>
+                          <nstrgmpr:STATUS xml:id="id_363">
+                                <xsl:value-of xml:id="id_364" select="nsmpr0:Status"/>
+                          </nstrgmpr:STATUS>
+                          <nstrgmpr:SPECIAL_PRICING_TYPE xml:id="id_367">
+                                <xsl:value-of xml:id="id_368" select="nsmpr0:Special_Pricing_Type__c"/>
+                          </nstrgmpr:SPECIAL_PRICING_TYPE>
+                          <nstrgmpr:FINAL_APPROVAL_TIME xml:id="id_369">
+                                <xsl:value-of xml:id="id_370" select="nsmpr0:Final_Approval_Time__c"/>
+                          </nstrgmpr:FINAL_APPROVAL_TIME>
+                          <nstrgmpr:SPA_START_DATE xml:id="id_194">
+                                <xsl:value-of xml:id="id_195" select="nsmpr0:SPA_Start_Date__c"/>
+                          </nstrgmpr:SPA_START_DATE>
+                          <nstrgmpr:SPA_EXPIRATION_DATE xml:id="id_371">
+                                <xsl:value-of xml:id="id_372" select="nsmpr0:ExpirationDate"/>
+                          </nstrgmpr:SPA_EXPIRATION_DATE>
+                          <nstrgmpr:DEAL_CATEGORY xml:id="id_424">
+                                <xsl:value-of xml:id="id_425" select="nsmpr0:Deal_Category__c"/>
+                          </nstrgmpr:DEAL_CATEGORY>
+                          <nstrgmpr:SPA_TOTAL_PRICE_CURRENCY xml:id="id_375">
+                                <xsl:value-of xml:id="id_376" select="nsmpr0:CurrencyIsoCode"/>
+                          </nstrgmpr:SPA_TOTAL_PRICE_CURRENCY>
+                          <nstrgmpr:SPA_TOTAL_PRICE xml:id="id_373">
+                                <xsl:value-of xml:id="id_374" select="nsmpr0:TotalPrice"/>
+                          </nstrgmpr:SPA_TOTAL_PRICE>
+                          <nstrgmpr:SPA_CREATED_DATE xml:id="id_200">
+                                <xsl:value-of xml:id="id_201" select="nsmpr0:CreatedDate"/>
+                          </nstrgmpr:SPA_CREATED_DATE>
+                          <nstrgmpr:SPA_TYPE xml:id="id_722">
+                                <xsl:value-of xml:id="id_723" select="nsmpr0:Special_Pricing_Type__c"/>
+                          </nstrgmpr:SPA_TYPE>
+                          <nstrgmpr:SPA_BACK_DATED xml:id="id_198">
+                                <xsl:value-of xml:id="id_199" select="nsmpr0:SPA_Back_Dated__c"/>
+                          </nstrgmpr:SPA_BACK_DATED>
+                          <nstrgmpr:ID xml:id="id_274">
+                                <xsl:value-of xml:id="id_719" select="nsmpr0:Id"/>
+                          </nstrgmpr:ID>
+                          <nstrgmpr:OPPORTUNITY_OWNER_ID xml:id="id_720">
+                                <xsl:value-of xml:id="id_721" select="nsmpr0:Opportunity/nsmpr0:OwnerId"/>
+                          </nstrgmpr:OPPORTUNITY_OWNER_ID>
+                          <nstrgmpr:SPA_OPPORTUNITY_ID xml:id="id_276">
+                                <xsl:value-of xml:id="id_277" select="nsmpr0:OpportunityId"/>
+                          </nstrgmpr:SPA_OPPORTUNITY_ID>
+                          <nstrgmpr:ACCOUNT_ID xml:id="id_365">
+                                <xsl:value-of xml:id="id_366" select="nsmpr0:AccountId"/>
+                          </nstrgmpr:ACCOUNT_ID>
+                          <nstrgmpr:NEW_RENEWAL xml:id="id_761">
+                                <xsl:value-of xml:id="id_762" select="nsmpr0:New_Renewal__c"/>
+                          </nstrgmpr:NEW_RENEWAL>
+                          <nstrgmpr:DISTRIBUTOR_ACCOUNT_NAME xml:id="id_765">
+                                <xsl:value-of xml:id="id_766" select="nsmpr0:Distributor__r/nsmpr0:Name"/>
+                          </nstrgmpr:DISTRIBUTOR_ACCOUNT_NAME>
+                          <nstrgmpr:DISTRIBUTOR_SFDC_ID xml:id="id_767">
+                                <xsl:value-of xml:id="id_768" select="nsmpr0:Distributor__r/nsmpr0:Id"/>
+                          </nstrgmpr:DISTRIBUTOR_SFDC_ID>
+                          <nstrgmpr:DISTRIBUTOR_ORACLE_ACCOUNT_ID xml:id="id_763">
+                                <xsl:value-of xml:id="id_764" select="nsmpr0:Distributor__r/nsmpr0:Oracle_Customer_Account_Id__c"/>
+                          </nstrgmpr:DISTRIBUTOR_ORACLE_ACCOUNT_ID>
+                          <nstrgmpr:DISTRIBUTOR_SFDC_CUSTOMER_KEY xml:id="id_769">
+                                <xsl:value-of xml:id="id_770" select="nsmpr0:Distributor__r/nsmpr0:Customer_Key__c"/>
+                          </nstrgmpr:DISTRIBUTOR_SFDC_CUSTOMER_KEY>
+                          <nstrgmpr:SPA_LAST_UPDATE_DATE xml:id="id_379">
+                                <xsl:value-of xml:id="id_380" select="nsmpr0:LastModifiedDate"/>
+                          </nstrgmpr:SPA_LAST_UPDATE_DATE>
+                          <nstrgmpr:SPA_CREATED_BY xml:id="id_771">
+                                <xsl:value-of xml:id="id_772" select="nsmpr0:CreatedById"/>
+                          </nstrgmpr:SPA_CREATED_BY>
+                          <nstrgmpr:SPA_LAST_UPDATED_BY xml:id="id_377">
+                                <xsl:value-of xml:id="id_381" select="nsmpr0:LastModifiedById/nsmpr0:Id"/>
+                          </nstrgmpr:SPA_LAST_UPDATED_BY>
+                          <nstrgmpr:SPA_FINAL_APPROVAL_DATE_TIME xml:id="id_773">
+                                <xsl:value-of xml:id="id_774" select="nsmpr0:Final_Approval_Time__c"/>
+                          </nstrgmpr:SPA_FINAL_APPROVAL_DATE_TIME>
+                          <nstrgmpr:SPA_CONTACT xml:id="id_775">
+                                <xsl:value-of xml:id="id_776" select="nsmpr0:Contact__c"/>
+                          </nstrgmpr:SPA_CONTACT>
+                          <nstrgmpr:SPA_TIERS xml:id="id_196">
+                                <xsl:value-of xml:id="id_197" select="nsmpr0:How_many_Tiers__c"/>
+                          </nstrgmpr:SPA_TIERS>
+                          <nstrgmpr:TIER1_MIN xml:id="id_114">
+                                <xsl:value-of xml:id="id_115" select="nsmpr0:Tier1_Min__c"/>
+                          </nstrgmpr:TIER1_MIN>
+                          <nstrgmpr:TIER2_MIN xml:id="id_192">
+                                <xsl:value-of xml:id="id_193" select="nsmpr0:Tier2_Min__c"/>
+                          </nstrgmpr:TIER2_MIN>
+                          <nstrgmpr:TIER3_MIN xml:id="id_98">
+                                <xsl:value-of xml:id="id_99" select="nsmpr0:Tier3_Min__c"/>
+                          </nstrgmpr:TIER3_MIN>
+                          <nstrgmpr:TIER4_MIN xml:id="id_106">
+                                <xsl:value-of xml:id="id_107" select="nsmpr0:Tier4_Min__c"/>
+                          </nstrgmpr:TIER4_MIN>
+                          <nstrgmpr:TIER5_MIN xml:id="id_112">
+                                <xsl:value-of xml:id="id_113" select="nsmpr0:Tier5_Min__c"/>
+                          </nstrgmpr:TIER5_MIN>
+                          <nstrgmpr:TIER1_MAX xml:id="id_92">
+                                <xsl:value-of xml:id="id_93" select="nsmpr0:Tier1_Max__c"/>
+                          </nstrgmpr:TIER1_MAX>
+                          <nstrgmpr:TIER2_MAX xml:id="id_110">
+                                <xsl:value-of xml:id="id_111" select="nsmpr0:Tier2_Max__c"/>
+                          </nstrgmpr:TIER2_MAX>
+                          <nstrgmpr:TIER3_MAX xml:id="id_94">
+                                <xsl:value-of xml:id="id_95" select="nsmpr0:Tier3_Max__c"/>
+                          </nstrgmpr:TIER3_MAX>
+                          <nstrgmpr:TIER4_MAX xml:id="id_100">
+                                <xsl:value-of xml:id="id_101" select="nsmpr0:Tier4_Max__c"/>
+                          </nstrgmpr:TIER4_MAX>
+                          <nstrgmpr:TIER5_MAX xml:id="id_96">
+                                <xsl:value-of xml:id="id_97" select="nsmpr0:Tier5_Max__c"/>
+                          </nstrgmpr:TIER5_MAX>
+                          <nstrgmpr:CREATED_BY xml:id="id_781">
+                                <xsl:value-of xml:id="id_782" select="$self/nsmpr5:metadata/nsmpr5:runtime/nsmpr5:invokedBy"/>
+                          </nstrgmpr:CREATED_BY>
+                          <nstrgmpr:CREATION_DATE xml:id="id_777">
+                                <xsl:value-of xml:id="id_778" select="fn:current-dateTime ()"/>
+                          </nstrgmpr:CREATION_DATE>
+                          <nstrgmpr:LAST_UPDATED_BY xml:id="id_779">
+                                <xsl:value-of xml:id="id_780" select="$self/nsmpr5:metadata/nsmpr5:runtime/nsmpr5:invokedBy"/>
+                          </nstrgmpr:LAST_UPDATED_BY>
+                          <nstrgmpr:LAST_UPDATED_DATE xml:id="id_108">
+                                <xsl:value-of xml:id="id_783" select="fn:current-dateTime ()"/>
+                          </nstrgmpr:LAST_UPDATED_DATE>
+                          <nstrgmpr:OIC_INSTANCE_ID xml:id="id_592">
+                                <xsl:value-of xml:id="id_593" select="$self/nsmpr5:metadata/nsmpr5:runtime/nsmpr5:instanceId"/>
+                          </nstrgmpr:OIC_INSTANCE_ID>
+                    </nstrgmpr:P_IN_CHM_MSI_SPA_HEADER_ITEM>
+              </xsl:for-each>
+        </nstrgmpr:P_IN_CHM_MSI_SPA_HEADER>
+        <nstrgmpr:P_IN_OIC_INSTANCE_ID xml:id="id_511">
+              <xsl:value-of xml:id="id_554" select="$self/nsmpr5:metadata/nsmpr5:runtime/nsmpr5:instanceId"/>
+        </nstrgmpr:P_IN_OIC_INSTANCE_ID>
+  </nstrgmpr:InputParameters>
+</xsl:template>

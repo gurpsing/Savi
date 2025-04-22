@@ -25,10 +25,10 @@ AS
         ,LAST_ACTIVITY_DATE              VARCHAR2(4000)              
         ,LAST_VIEWED_DATE                VARCHAR2(4000)              
         ,LAST_REFERENCED_DATE            VARCHAR2(4000)              
-        ,INSTALLER_NAME                  VARCHAR2(4000)              
         ,SPA                             VARCHAR2(4000)           
         ,STATUS                          VARCHAR2(4000)              
         ,INSTALLER_ENLIGHTEN_ID          VARCHAR2(4000)              
+        ,INSTALLER_ID                    VARCHAR2(4000)              
         ,ATTRIBUTE_CONTEXT               VARCHAR2(4000)              
         ,ATTRIBUTE1                      VARCHAR2(4000)              
         ,ATTRIBUTE2                      VARCHAR2(4000)              
@@ -58,11 +58,10 @@ AS
          P_IN_CHM_MSI_SPA_INSTALLERS    IN TBL_CHM_MSI_SPA_INSTALLERS
         ,P_IN_OIC_INSTANCE_ID           IN VARCHAR2
     );
-    
-    
+
+
     TYPE REC_CHM_MSI_SPA_DISTRIBUTORS IS RECORD (
          ID                              VARCHAR2(4000)              
-        ,DISTRIBUTOR_ACCOUNT_ID          VARCHAR2(4000)              
         ,IS_DELETED                      VARCHAR2(4000)              
         ,NAME                            VARCHAR2(4000)              
         ,CURRENCY_ISO_CODE               VARCHAR2(4000)              
@@ -73,8 +72,8 @@ AS
         ,SYSTEM_MOD_STAMP                VARCHAR2(4000)              
         ,LAST_VIEWED_DATE                VARCHAR2(4000)              
         ,LAST_REFERENCED_DATE            VARCHAR2(4000)              
-        ,SPA_TEST                        VARCHAR2(4000)              
-        ,DISTRIBUTOR_ACCOUNT_NAME        VARCHAR2(32000)             
+        ,SPA                             VARCHAR2(4000)              
+        ,DISTRIBUTOR_SFDC_ACCOUNT_ID     VARCHAR2(4000)             
         ,SPA_STATUS                      VARCHAR2(4000)              
         ,ORACLE_CUSTOMER_NUMBER          VARCHAR2(4000)              
         ,SPA_AND_OPPORTUNITIES           VARCHAR2(4000)              
@@ -108,8 +107,8 @@ AS
          P_IN_CHM_MSI_SPA_DISTRIBUTORS  IN TBL_CHM_MSI_SPA_DISTRIBUTORS
         ,P_IN_OIC_INSTANCE_ID           IN VARCHAR2
     );
-    
-    
+
+
     TYPE REC_CHM_MSI_SPA_GEO_DETAILS IS RECORD (
          ID                              VARCHAR2(4000)              
         ,IS_DELETED                      VARCHAR2(4000)              
@@ -157,7 +156,7 @@ AS
          P_IN_CHM_MSI_SPA_GEO_DETAILS   IN TBL_CHM_MSI_SPA_GEO_DETAILS
         ,P_IN_OIC_INSTANCE_ID           IN VARCHAR2
     );
-        
-        
+
+
 END CHM_MSI_SPA_DIST_INSTALLER_PKG;
 /

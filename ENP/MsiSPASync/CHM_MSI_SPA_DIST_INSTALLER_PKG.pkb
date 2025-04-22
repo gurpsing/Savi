@@ -11,7 +11,7 @@ create or replace PACKAGE BODY CHM_MSI_SPA_DIST_INSTALLER_PKG
 * 22-Mar-2025   Gurpreet Singh                 1.0              Intial Version                                        *
 **********************************************************************************************************************/
 as
-    
+
     PROCEDURE MERGE_SPA_INSTALLERS_DATA (P_IN_CHM_MSI_SPA_INSTALLERS IN TBL_CHM_MSI_SPA_INSTALLERS
                                     ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2)
 	AS
@@ -37,10 +37,11 @@ as
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).LAST_ACTIVITY_DATE             LAST_ACTIVITY_DATE         
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).LAST_VIEWED_DATE               LAST_VIEWED_DATE           
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).LAST_REFERENCED_DATE           LAST_REFERENCED_DATE       
-                        ,P_IN_CHM_MSI_SPA_INSTALLERS(I).INSTALLER_NAME                 INSTALLER_NAME             
+                        --,P_IN_CHM_MSI_SPA_INSTALLERS(I).INSTALLER_NAME                 INSTALLER_NAME             
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).SPA                            SPA                        
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).STATUS                         STATUS                                            
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).INSTALLER_ENLIGHTEN_ID         INSTALLER_ENLIGHTEN_ID                                  
+                        ,P_IN_CHM_MSI_SPA_INSTALLERS(I).INSTALLER_ID                   INSTALLER_ID
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).ATTRIBUTE_CONTEXT              ATTRIBUTE_CONTEXT                                
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).ATTRIBUTE1                     ATTRIBUTE1                                       
                         ,P_IN_CHM_MSI_SPA_INSTALLERS(I).ATTRIBUTE2                     ATTRIBUTE2                                       
@@ -80,7 +81,7 @@ as
                     ,LAST_ACTIVITY_DATE      
                     ,LAST_VIEWED_DATE        
                     ,LAST_REFERENCED_DATE    
-                    ,INSTALLER_NAME          
+                    ,INSTALLER_ID          
                     ,SPA                     
                     ,STATUS                  
                     ,INSTALLER_ENLIGHTEN_ID  
@@ -121,7 +122,7 @@ as
                     ,TMP.LAST_ACTIVITY_DATE                    
                     ,TMP.LAST_VIEWED_DATE                      
                     ,TMP.LAST_REFERENCED_DATE                  
-                    ,TMP.INSTALLER_NAME                        
+                    ,TMP.INSTALLER_ID                       
                     ,TMP.SPA                                   
                     ,TMP.STATUS                                
                     ,TMP.INSTALLER_ENLIGHTEN_ID                
@@ -160,7 +161,7 @@ as
                     ,LAST_ACTIVITY_DATE                 = TMP.LAST_ACTIVITY_DATE                    
                     ,LAST_VIEWED_DATE                   = TMP.LAST_VIEWED_DATE                      
                     ,LAST_REFERENCED_DATE               = TMP.LAST_REFERENCED_DATE                  
-                    ,INSTALLER_NAME                     = TMP.INSTALLER_NAME                        
+                    ,INSTALLER_ID                       = TMP.INSTALLER_ID                        
                     ,SPA                                = TMP.SPA                                   
                     ,STATUS                             = TMP.STATUS                                
                     ,INSTALLER_ENLIGHTEN_ID             = TMP.INSTALLER_ENLIGHTEN_ID                
@@ -190,13 +191,13 @@ as
 
                 L_MERGE_COUNT := L_MERGE_COUNT + 1;
                 COMMIT;
-                
+
             EXCEPTION
                 WHEN OTHERS THEN 
                     L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
                     UPDATE CHM_INTEGRATION_RUNS
                     SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
-                                    ||P_IN_CHM_MSI_SPA_INSTALLERS(I).ID ||'-'     
+                                    ||P_IN_CHM_MSI_SPA_INSTALLERS(I).ID      
                                     ||'] '
                                     ||L_ERROR_MESSAGE 
                             ,LAST_UPDATE_DATE           = SYSDATE
@@ -249,8 +250,8 @@ as
                         ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).SYSTEM_MOD_STAMP                         SYSTEM_MOD_STAMP               
                         ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).LAST_VIEWED_DATE                         LAST_VIEWED_DATE               
                         ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).LAST_REFERENCED_DATE                     LAST_REFERENCED_DATE           
-                        ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).SPA_TEST                                 SPA_TEST                       
-                        ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).DISTRIBUTOR_ACCOUNT_NAME                 DISTRIBUTOR_ACCOUNT_NAME       
+                        ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).SPA                                      SPA                       
+                        ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).DISTRIBUTOR_SFDC_ACCOUNT_ID              DISTRIBUTOR_SFDC_ACCOUNT_ID       
                         ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).SPA_STATUS                               SPA_STATUS                     
                         ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).ORACLE_CUSTOMER_NUMBER                   ORACLE_CUSTOMER_NUMBER          
                         ,P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).SPA_AND_OPPORTUNITIES                    SPA_AND_OPPORTUNITIES                 
@@ -292,8 +293,8 @@ as
                     ,SYSTEM_MOD_STAMP          
                     ,LAST_VIEWED_DATE          
                     ,LAST_REFERENCED_DATE      
-                    ,SPA_TEST                  
-                    ,DISTRIBUTOR_ACCOUNT_NAME  
+                    ,SPA 
+                    ,DISTRIBUTOR_SFDC_ACCOUNT_ID  
                     ,SPA_STATUS                
                     ,ORACLE_CUSTOMER_NUMBER    
                     ,SPA_AND_OPPORTUNITIES     
@@ -334,8 +335,8 @@ as
                     ,TMP.SYSTEM_MOD_STAMP          
                     ,TMP.LAST_VIEWED_DATE          
                     ,TMP.LAST_REFERENCED_DATE      
-                    ,TMP.SPA_TEST                  
-                    ,TMP.DISTRIBUTOR_ACCOUNT_NAME  
+                    ,TMP.SPA                 
+                    ,TMP.DISTRIBUTOR_SFDC_ACCOUNT_ID  
                     ,TMP.SPA_STATUS                
                     ,TMP.ORACLE_CUSTOMER_NUMBER    
                     ,TMP.SPA_AND_OPPORTUNITIES     
@@ -364,55 +365,55 @@ as
                 )
                 WHEN MATCHED THEN UPDATE
                 SET 
-                     IS_DELETED                 = TMP.IS_DELETED                            
-                    ,NAME                       = TMP.NAME                                  
-                    ,CURRENCY_ISO_CODE          = TMP.CURRENCY_ISO_CODE              
-                    ,SFDC_CREATED_DATE          = TMP.SFDC_CREATED_DATE             
-                    ,SFDC_CREATED_BY            = TMP.SFDC_CREATED_BY               
-                    ,SFDC_LAST_UPDATE_DATE      = TMP.SFDC_LAST_UPDATE_DATE      
-                    ,SFDC_LAST_UPDATED_BY       = TMP.SFDC_LAST_UPDATED_BY       
-                    ,SYSTEM_MOD_STAMP           = TMP.SYSTEM_MOD_STAMP              
-                    ,LAST_VIEWED_DATE           = TMP.LAST_VIEWED_DATE              
-                    ,LAST_REFERENCED_DATE       = TMP.LAST_REFERENCED_DATE          
-                    ,SPA_TEST                   = TMP.SPA_TEST                      
-                    ,DISTRIBUTOR_ACCOUNT_NAME   = TMP.DISTRIBUTOR_ACCOUNT_NAME      
-                    ,SPA_STATUS                 = TMP.SPA_STATUS                    
-                    ,ORACLE_CUSTOMER_NUMBER     = TMP.ORACLE_CUSTOMER_NUMBER        
-                    ,SPA_AND_OPPORTUNITIES      = TMP.SPA_AND_OPPORTUNITIES         
-                    ,LINE_STATUS                = TMP.LINE_STATUS                   
-                    ,ATTRIBUTE_CONTEXT          = TMP.ATTRIBUTE_CONTEXT             
-                    ,ATTRIBUTE1                 = TMP.ATTRIBUTE1                    
-                    ,ATTRIBUTE2                 = TMP.ATTRIBUTE2                    
-                    ,ATTRIBUTE3                 = TMP.ATTRIBUTE3                    
-                    ,ATTRIBUTE4                 = TMP.ATTRIBUTE4                    
-                    ,ATTRIBUTE5                 = TMP.ATTRIBUTE5                    
-                    ,ATTRIBUTE6                 = TMP.ATTRIBUTE6                    
-                    ,ATTRIBUTE7                 = TMP.ATTRIBUTE7                    
-                    ,ATTRIBUTE8                 = TMP.ATTRIBUTE8                                                      
-                    ,ATTRIBUTE9                 = TMP.ATTRIBUTE9                    
-                    ,ATTRIBUTE10                = TMP.ATTRIBUTE10                
-                    ,ATTRIBUTE11                = TMP.ATTRIBUTE11                           
-                    ,ATTRIBUTE12                = TMP.ATTRIBUTE12                    
-                    ,ATTRIBUTE13                = TMP.ATTRIBUTE13                   
-                    ,ATTRIBUTE14                = TMP.ATTRIBUTE14                   
-                    ,ATTRIBUTE15                = TMP.ATTRIBUTE15                
-					,CREATED_BY                 = TMP.CREATED_BY                 
-                    ,CREATION_DATE              = TMP.CREATION_DATE              
-                    ,LAST_UPDATED_BY            = TMP.LAST_UPDATED_BY            
-                    ,LAST_UPDATED_DATE          = TMP.LAST_UPDATED_DATE          
-                    ,OIC_INSTANCE_ID            = TMP.OIC_INSTANCE_ID                
+                     IS_DELETED                         = TMP.IS_DELETED                            
+                    ,NAME                               = TMP.NAME                                  
+                    ,CURRENCY_ISO_CODE                  = TMP.CURRENCY_ISO_CODE              
+                    ,SFDC_CREATED_DATE                  = TMP.SFDC_CREATED_DATE             
+                    ,SFDC_CREATED_BY                    = TMP.SFDC_CREATED_BY               
+                    ,SFDC_LAST_UPDATE_DATE              = TMP.SFDC_LAST_UPDATE_DATE      
+                    ,SFDC_LAST_UPDATED_BY               = TMP.SFDC_LAST_UPDATED_BY       
+                    ,SYSTEM_MOD_STAMP                   = TMP.SYSTEM_MOD_STAMP              
+                    ,LAST_VIEWED_DATE                   = TMP.LAST_VIEWED_DATE              
+                    ,LAST_REFERENCED_DATE               = TMP.LAST_REFERENCED_DATE          
+                    ,SPA                                = TMP.SPA
+                    ,DISTRIBUTOR_SFDC_ACCOUNT_ID        = TMP.DISTRIBUTOR_SFDC_ACCOUNT_ID      
+                    ,SPA_STATUS                         = TMP.SPA_STATUS                    
+                    ,ORACLE_CUSTOMER_NUMBER             = TMP.ORACLE_CUSTOMER_NUMBER        
+                    ,SPA_AND_OPPORTUNITIES              = TMP.SPA_AND_OPPORTUNITIES         
+                    ,LINE_STATUS                        = TMP.LINE_STATUS                   
+                    ,ATTRIBUTE_CONTEXT                  = TMP.ATTRIBUTE_CONTEXT             
+                    ,ATTRIBUTE1                         = TMP.ATTRIBUTE1                    
+                    ,ATTRIBUTE2                         = TMP.ATTRIBUTE2                    
+                    ,ATTRIBUTE3                         = TMP.ATTRIBUTE3                    
+                    ,ATTRIBUTE4                         = TMP.ATTRIBUTE4                    
+                    ,ATTRIBUTE5                         = TMP.ATTRIBUTE5                    
+                    ,ATTRIBUTE6                         = TMP.ATTRIBUTE6                    
+                    ,ATTRIBUTE7                         = TMP.ATTRIBUTE7                    
+                    ,ATTRIBUTE8                         = TMP.ATTRIBUTE8                                                      
+                    ,ATTRIBUTE9                         = TMP.ATTRIBUTE9                    
+                    ,ATTRIBUTE10                        = TMP.ATTRIBUTE10                
+                    ,ATTRIBUTE11                        = TMP.ATTRIBUTE11                           
+                    ,ATTRIBUTE12                        = TMP.ATTRIBUTE12                    
+                    ,ATTRIBUTE13                        = TMP.ATTRIBUTE13                   
+                    ,ATTRIBUTE14                        = TMP.ATTRIBUTE14                   
+                    ,ATTRIBUTE15                        = TMP.ATTRIBUTE15                
+					,CREATED_BY                         = TMP.CREATED_BY                 
+                    ,CREATION_DATE                      = TMP.CREATION_DATE              
+                    ,LAST_UPDATED_BY                    = TMP.LAST_UPDATED_BY            
+                    ,LAST_UPDATED_DATE                  = TMP.LAST_UPDATED_DATE          
+                    ,OIC_INSTANCE_ID                    = TMP.OIC_INSTANCE_ID                
 				WHERE 1 = 1
 				AND TBL.ID                      = TMP.ID;
 
                 L_MERGE_COUNT := L_MERGE_COUNT + 1;
                 COMMIT;
-                
+
             EXCEPTION
                 WHEN OTHERS THEN 
                     L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
                     UPDATE CHM_INTEGRATION_RUNS
                     SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
-                                    ||P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).ID ||'-'     
+                                    ||P_IN_CHM_MSI_SPA_DISTRIBUTORS(I).ID    
                                     ||'] '
                                     ||L_ERROR_MESSAGE 
                             ,LAST_UPDATE_DATE           = SYSDATE
@@ -429,9 +430,9 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
@@ -623,19 +624,19 @@ as
 
                 L_MERGE_COUNT := L_MERGE_COUNT + 1;
                 COMMIT;
-            
+
             EXCEPTION
                 WHEN OTHERS THEN 
                     L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
                     UPDATE CHM_INTEGRATION_RUNS
                     SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
-                                    ||P_IN_CHM_MSI_SPA_GEO_DETAILS(I).ID ||'-'     
+                                    ||P_IN_CHM_MSI_SPA_GEO_DETAILS(I).ID   
                                     ||'] '
                                     ||L_ERROR_MESSAGE 
                             ,LAST_UPDATE_DATE           = SYSDATE
                     WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
                     COMMIT; 
-            
+
             END;
 
 
@@ -655,6 +656,5 @@ as
     END MERGE_SPA_GEO_DETAILS_DATA;
 
 
-    
-
 END CHM_MSI_SPA_DIST_INSTALLER_PKG;
+/

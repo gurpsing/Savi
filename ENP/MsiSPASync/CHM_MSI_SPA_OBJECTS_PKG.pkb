@@ -230,9 +230,9 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT)||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
@@ -451,7 +451,7 @@ as
                     L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
                     UPDATE CHM_INTEGRATION_RUNS
                     SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
-                                    ||P_IN_CHM_MSI_SPA_SYSTEM_ATTACHMENTS(I).ID ||'-'     
+                                    ||P_IN_CHM_MSI_SPA_SYSTEM_ATTACHMENTS(I).ID      
                                     ||'] '
                                     ||L_ERROR_MESSAGE 
                             ,LAST_UPDATE_DATE           = SYSDATE
@@ -468,9 +468,9 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT)||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
@@ -498,8 +498,8 @@ as
                         --,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).SPA_ID                            SPA_ID                                                    
                         --,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).ITEM_NUMBER                       ITEM_NUMBER                                                
                         ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER1_REBATE_AMOUNT               TIER1_REBATE_AMOUNT                               
-                        ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER2_REABTE_AMOUNT               TIER2_REABTE_AMOUNT                                 
-                        ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER3_REABTE_AMOUNT               TIER3_REABTE_AMOUNT                                
+                        ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER2_REBATE_AMOUNT               TIER2_REBATE_AMOUNT                                 
+                        ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER3_REBATE_AMOUNT               TIER3_REBATE_AMOUNT                                
                         ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER4_REBATE_AMOUNT               TIER4_REBATE_AMOUNT                   
                         ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).TIER5_REBATE_AMOUNT               TIER5_REBATE_AMOUNT                 
                         ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).STATUS                            STATUS                                             
@@ -550,8 +550,8 @@ as
 				--,SPA_ID                  
 				--,ITEM_NUMBER             
 				,TIER1_REBATE_AMOUNT     
-				,TIER2_REABTE_AMOUNT     
-				,TIER3_REABTE_AMOUNT     
+				,TIER2_REBATE_AMOUNT     
+				,TIER3_REBATE_AMOUNT     
 				,TIER4_REBATE_AMOUNT     
 				,TIER5_REBATE_AMOUNT     
 				,STATUS                  
@@ -599,8 +599,8 @@ as
                     --,TMP.SPA_ID                                                       
                     --,TMP.ITEM_NUMBER                                                  
                     ,TMP.TIER1_REBATE_AMOUNT                                   
-                    ,TMP.TIER2_REABTE_AMOUNT                                  
-                    ,TMP.TIER3_REABTE_AMOUNT                                  
+                    ,TMP.TIER2_REBATE_AMOUNT                                  
+                    ,TMP.TIER3_REBATE_AMOUNT                                  
                     ,TMP.TIER4_REBATE_AMOUNT                     
                     ,TMP.TIER5_REBATE_AMOUNT                     
                     ,TMP.STATUS                                               
@@ -646,8 +646,8 @@ as
                      --SPA_ID                                          =TMP.SPA_ID                                   
                      --ITEM_NUMBER                                     =TMP.ITEM_NUMBER                              
                      TIER1_REBATE_AMOUNT                             =TMP.TIER1_REBATE_AMOUNT               
-                    ,TIER2_REABTE_AMOUNT                             =TMP.TIER2_REABTE_AMOUNT              
-                    ,TIER3_REABTE_AMOUNT                             =TMP.TIER3_REABTE_AMOUNT              
+                    ,TIER2_REBATE_AMOUNT                             =TMP.TIER2_REBATE_AMOUNT              
+                    ,TIER3_REBATE_AMOUNT                             =TMP.TIER3_REBATE_AMOUNT              
                     ,TIER4_REBATE_AMOUNT                             =TMP.TIER4_REBATE_AMOUNT        
                     ,TIER5_REBATE_AMOUNT                             =TMP.TIER5_REBATE_AMOUNT        
                     ,STATUS                                          =TMP.STATUS                           
@@ -694,7 +694,7 @@ as
                     L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
                     UPDATE CHM_INTEGRATION_RUNS
                     SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
-                                    ||P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).ID ||'-'     
+                                    ||P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).ID     
                                     ||'] '
                                     ||L_ERROR_MESSAGE 
                             ,LAST_UPDATE_DATE           = SYSDATE
@@ -711,9 +711,9 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT)||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 
@@ -736,13 +736,9 @@ as
                     SELECT
 
                          P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).ID                                ID                                                   
-                        --,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SPA_NUMBER                        SPA_NUMBER                                           
-                        --,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SPA_ID                            SPA_ID                         
-                        --,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).ITEM_NUMBER                       ITEM_NUMBER                           
                         ,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).TIER_NAME                         TIER_NAME                             
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).MIN_QTY                           MIN_QTY              
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).MAX_QTY                           MAX_QTY              
-						--,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).UNIT_REBATE_AMOUNT                UNIT_REBATE_AMOUNT   
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SFDC_CREATED_DATE                 SFDC_CREATED_DATE    
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SFDC_LAST_UPDATE_DATE             SFDC_LAST_UPDATE_DATE
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SFDC_CREATED_BY                   SFDC_CREATED_BY      
@@ -785,13 +781,9 @@ as
                 INSERT (
 				     CHM_MSI_SPA_SYS_SIZE_DETAIL_ID
 				    ,ID                            
-				    --,SPA_NUMBER                    
-				    --,SPA_ID                        
-				    --,ITEM_NUMBER                   
 				    ,TIER_NAME                     
 				    ,MIN_QTY                       
 				    ,MAX_QTY                       
-				    --,UNIT_REBATE_AMOUNT            
 				    ,SFDC_CREATED_DATE             
 				    ,SFDC_LAST_UPDATE_DATE         
 				    ,SFDC_CREATED_BY               
@@ -880,13 +872,9 @@ as
                 WHEN MATCHED THEN UPDATE
                 SET 
 
-                     --ID                                           =TMP.ID                                                                   
-                     --SPA_ID                                       =TMP.SPA_ID                        
-                     --ITEM_NUMBER                                  =TMP.ITEM_NUMBER                   
                      TIER_NAME                                    =TMP.TIER_NAME                     
                     ,MIN_QTY                                      =TMP.MIN_QTY                       
                     ,MAX_QTY                                      =TMP.MAX_QTY                       
-                    --,UNIT_REBATE_AMOUNT                           =TMP.UNIT_REBATE_AMOUNT            
                     ,SFDC_CREATED_DATE                            =TMP.SFDC_CREATED_DATE             
                     ,SFDC_LAST_UPDATE_DATE                        =TMP.SFDC_LAST_UPDATE_DATE         
                     ,SFDC_CREATED_BY                              =TMP.SFDC_CREATED_BY               
@@ -910,18 +898,18 @@ as
                     ,LAST_UPDATED_BY                              =TMP.LAST_UPDATED_BY            
                     ,LAST_UPDATED_DATE                            =SYSDATE                                              
                     ,OIC_INSTANCE_ID                              =TMP.OIC_INSTANCE_ID 
-					,IS_DELETED          						  =TMP.PRODUCT                  
-					,NAME                						  =TMP.TIER_INCENTIVE      
-					,CURRENCY_ISO_CODE   						  =TMP.SPA                 
-					,SYSTEM_MOD_STAMP    						  =TMP.LAST_REFERENCED_DATE
-					,LAST_ACTIVITY_DATE  						  =TMP.LAST_VIEWED_DATE    
-					,LAST_VIEWED_DATE    						  =TMP.LAST_ACTIVITY_DATE  
-					,LAST_REFERENCED_DATE						  =TMP.SYSTEM_MOD_STAMP    
-					,SPA                 						  =TMP.CURRENCY_ISO_CODE   
-					,TIER_INCENTIVE      						  =TMP.NAME                
-					,PRODUCT             						  =TMP.IS_DELETED          
-					 WHERE 1 = 1
-					 AND TBL.ID = TMP.ID;
+					,IS_DELETED          						  =TMP.IS_DELETED               
+					,NAME                						  =TMP.NAME                
+					,CURRENCY_ISO_CODE   						  =TMP.CURRENCY_ISO_CODE   
+					,SYSTEM_MOD_STAMP    						  =TMP.SYSTEM_MOD_STAMP    
+					,LAST_ACTIVITY_DATE  						  =TMP.LAST_ACTIVITY_DATE  
+					,LAST_VIEWED_DATE    						  =TMP.LAST_VIEWED_DATE    
+					,LAST_REFERENCED_DATE						  =TMP.LAST_REFERENCED_DATE
+					,SPA                 						  =TMP.SPA                 
+					,TIER_INCENTIVE      						  =TMP.TIER_INCENTIVE      
+					,PRODUCT             						  =TMP.PRODUCT             
+                WHERE 1 = 1
+                AND TBL.ID = TMP.ID;
 
                 L_MERGE_COUNT := L_MERGE_COUNT + 1;
                 COMMIT;
@@ -931,7 +919,7 @@ as
                     L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
                     UPDATE CHM_INTEGRATION_RUNS
                     SET      LOG    = LOG   ||CHR(10)||'Merge Error [' 
-                                    ||P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).ID ||'-'     
+                                    ||P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).ID     
                                     ||'] '
                                     ||L_ERROR_MESSAGE 
                             ,LAST_UPDATE_DATE           = SYSDATE
@@ -948,9 +936,9 @@ as
                 ,TOTAL_SUCCESS_RECORDS      = nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT
                 ,TOTAL_ERROR_RECORDS        = nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)
                 ,LOG                        = LOG   ||CHR(10)||'Data Merged Successfully.'   ||CHR(10)  
-                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT) ||CHR(10)
-                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||CHR(10)
+                                                    ||CHR(9)||'Total Records Fetched: '     ||(nvl(TOTAL_FETCHED_RECORDS,0)  + L_COUNT) ||' ('||L_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Merged: '      ||(nvl(TOTAL_SUCCESS_RECORDS,0)  + L_MERGE_COUNT)||' ('||L_MERGE_COUNT||')'||CHR(10)
+                                                    ||CHR(9)||'Total Records Failed to Merge: '|| (nvl(TOTAL_ERROR_RECORDS,0)    + (L_COUNT - L_MERGE_COUNT)) ||' ('||(L_COUNT - L_MERGE_COUNT)||')'||CHR(10)
         WHERE   CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;            
         COMMIT;
 

@@ -4,3 +4,14 @@ SVC_INT_ADMIN:welcome123
 
 ReportServiceSOAPConnection
 https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com:443/xmlpserver/services/ExternalReportWSSService?wsdl
+
+
+savsingh@enphaseenergy.com
+rnara@enphaseenergy.com
+harishaps@enphaseenergy.com
+rvarahagiri@enphaseenergy.com
+abnayak@enphaseenergy.com
+
+Anubha Singh <anubha.s@selectiva.com>, Lokesh Gupta <lokesh@selectiva.com>, Savinder Singh <savi@selectiva.com>
+Bharti Agrawal <bharti.a@selectiva.com>
+
