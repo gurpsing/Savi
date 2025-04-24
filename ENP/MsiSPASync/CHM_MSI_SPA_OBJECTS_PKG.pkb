@@ -486,6 +486,10 @@ as
         L_ERROR_MESSAGE VARCHAR2(30000);
     BEGIN
         FOR I IN P_IN_CHM_MSI_SYS_SIZE_INCENTIVE.FIRST..P_IN_CHM_MSI_SYS_SIZE_INCENTIVE.LAST LOOP
+            
+            insert into test_log(log) values(P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).ID  ); commit;
+         debug_rk('CHM_MSI_SYS_SIZE_INCENTIVE data for SPA ' || 'ID = ' || P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).ID || ', SPA = ' || P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).SPA  || ' ,PRODUCT = ' || P_IN_CHM_MSI_SYS_SIZE_INCENTIVE(I).PRODUCT);  -- added by ronnie
+            
             L_COUNT := L_COUNT + 1;
             BEGIN
                 MERGE INTO CHM_MSI_SYS_SIZE_INCENTIVE TBL
@@ -727,10 +731,23 @@ as
         L_COUNT         NUMBER := 0;
         L_MERGE_COUNT   NUMBER := 0;
         L_ERROR_MESSAGE VARCHAR2(30000);
+        l_id            VARCHAR2(4000);
     BEGIN
         FOR I IN P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM.FIRST..P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM.LAST LOOP
             L_COUNT := L_COUNT + 1;
             BEGIN
+                BEGIN --changes by Ronnie for adding ID column into SYS_SIZE_INCENTIVE_ID column starts
+                    SELECT A.ID INTO l_id FROM CHM_MSI_SYS_SIZE_INCENTIVE A 
+                        WHERE A.SPA = P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SPA
+                        AND A.PRODUCT = P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).PRODUCT;
+				EXCEPTION
+					WHEN NO_DATA_FOUND THEN
+						l_id := null;
+					WHEN TOO_MANY_ROWS THEN
+						--l_id := null;
+						L_ERROR_MESSAGE := substr(SQLERRM,1,30000);
+                END;    --changes by Ronnie for adding ID column into SYS_SIZE_INCENTIVE_ID column ends.
+                
                 MERGE INTO CHM_MSI_SYS_SIZE_INCENTIVE_CHM TBL
                 USING (
                     SELECT
@@ -773,8 +790,10 @@ as
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).LAST_REFERENCED_DATE			  LAST_REFERENCED_DATE
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).SPA 							  SPA                
 						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).TIER_INCENTIVE    				  TIER_INCENTIVE  
-						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).PRODUCT     					  PRODUCT        
-						FROM
+						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).PRODUCT     					  PRODUCT   
+                        , l_id                                                                    SYS_SIZE_INCENTIVE_ID  --Ronnie
+						,P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM(I).STATUS     					      STATUS 
+                        FROM
                             DUAL
                 ) TMP ON ( TBL.ID = TMP.ID )
                 WHEN NOT MATCHED THEN
@@ -818,8 +837,9 @@ as
 					,LAST_REFERENCED_DATE
 					,SPA                 
 					,TIER_INCENTIVE      
-					,PRODUCT             
-
+					,PRODUCT  
+                    ,SYS_SIZE_INCENTIVE_ID  --Ronnie
+                    ,STATUS
                 )
                 VALUES
                 ( 
@@ -866,8 +886,9 @@ as
 					,TMP.LAST_REFERENCED_DATE
 					,TMP.SPA                 
 					,TMP.TIER_INCENTIVE      
-                    ,TMP.PRODUCT             
-
+                    ,TMP.PRODUCT
+                    ,l_id  -- ROnnie
+                    ,TMP.STATUS
                 )
                 WHEN MATCHED THEN UPDATE
                 SET 
@@ -907,7 +928,9 @@ as
 					,LAST_REFERENCED_DATE						  =TMP.LAST_REFERENCED_DATE
 					,SPA                 						  =TMP.SPA                 
 					,TIER_INCENTIVE      						  =TMP.TIER_INCENTIVE      
-					,PRODUCT             						  =TMP.PRODUCT             
+					,PRODUCT             						  =TMP.PRODUCT 
+                    ,SYS_SIZE_INCENTIVE_ID                          =l_id   --- Ronnie
+                    ,STATUS                                       =TMP.STATUS
                 WHERE 1 = 1
                 AND TBL.ID = TMP.ID;
 
@@ -943,72 +966,6 @@ as
         COMMIT;
 
     END MERGE_CHM_MSI_SYS_SIZE_INCENTIVE_CHM_DATA;
-
-	  --Procedure to update integration run table   
-    PROCEDURE FINISH_INTEGRATION_RUN (
-         P_IN_OIC_INSTANCE_ID       IN VARCHAR2
-        ,P_OUT_DATA                 OUT    SYS_REFCURSOR
-    )
-    AS
-    BEGIN
-
-        UPDATE CHM_INTEGRATION_RUNS
-        SET 
-             PHASE                  = 'Completed'
-            ,STATUS                 = 'Success'
-            ,LAST_COMPLETED_STAGE   = 'Data Merge'
-            ,LOG                    = LOG || CHR(10) ||'Integration completed successfully'
-            ,LAST_UPDATE_DATE       = SYSDATE
-            ,COMPLETION_DATE        = SYSDATE
-        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
-        COMMIT;
-
-        UPDATE CHM_INTEGRATIONS
-        SET 
-             LAST_RUN_STATUS = 'Success'
-        WHERE LAST_RUN_ID = P_IN_OIC_INSTANCE_ID;
-        COMMIT;
-
-        OPEN P_OUT_DATA FOR
-        SELECT NVL(TOTAL_SUCCESS_RECORDS,0) TOTAL_SUCCESS_RECORDS, NVL(TOTAL_ERROR_RECORDS,0) TOTAL_ERROR_RECORDS
-        FROM CHM_INTEGRATION_RUNS 
-        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
-
-    END FINISH_INTEGRATION_RUN;
-
-    --Procedure to update log
-    PROCEDURE UPDATE_LOG (
-         P_IN_LOG                IN VARCHAR2
-        ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    )
-    AS
-
-    BEGIN
-        UPDATE CHM_INTEGRATION_RUNS
-        SET 
-             LOG                        = LOG || CHR(10) || P_IN_LOG
-            ,LAST_UPDATE_DATE           = SYSDATE
-        WHERE CHM_INTEGRATION_RUN_ID    = P_IN_OIC_INSTANCE_ID;
-        COMMIT;
-    END UPDATE_LOG;
-
-    --Procedure to check if any record failed
-    PROCEDURE CHECK_FAILED_RECORDS (
-        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    )
-    AS
-        L_COUNT NUMBER;
-    BEGIN
-        SELECT NVL(TOTAL_ERROR_RECORDS,0) INTO L_COUNT
-        FROM CHM_INTEGRATION_RUNS
-        WHERE CHM_INTEGRATION_RUN_ID = P_IN_OIC_INSTANCE_ID;
-
-        IF L_COUNT > 0 THEN
-            RAISE_APPLICATION_ERROR(-20001, 'Few Records failed to merge');
-        END IF;
-
-    END CHECK_FAILED_RECORDS;
-
 
 END CHM_MSI_SPA_OBJECTS_PKG;
 /

@@ -205,6 +205,7 @@ AS
         ,SPA                                  VARCHAR2(4000)
         ,TIER_INCENTIVE                       NUMBER(12,2)
         ,PRODUCT                              VARCHAR2(4000)
+        ,STATUS                              VARCHAR2(4000)
     );
 
     TYPE TBL_CHM_MSI_SYS_SIZE_INCENTIVE_CHM IS TABLE OF REC_CHM_MSI_SYS_SIZE_INCENTIVE_CHM;
@@ -213,25 +214,8 @@ AS
          P_IN_CHM_MSI_SYS_SIZE_INCENTIVE_CHM IN TBL_CHM_MSI_SYS_SIZE_INCENTIVE_CHM
         ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
 	);								
-									
-    --Procedure to update integration run table   
-    PROCEDURE FINISH_INTEGRATION_RUN (
-         P_IN_OIC_INSTANCE_ID       IN VARCHAR2
-        ,P_OUT_DATA                 OUT    SYS_REFCURSOR
-    );
 
-
-    --Procedure to update log
-    PROCEDURE UPDATE_LOG (
-         P_IN_LOG                IN VARCHAR2
-        ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    );
-
-
-    --Procedure to check if any record failed
-    PROCEDURE CHECK_FAILED_RECORDS (
-        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
-    );
+    
 
 END CHM_MSI_SPA_OBJECTS_PKG;
 /

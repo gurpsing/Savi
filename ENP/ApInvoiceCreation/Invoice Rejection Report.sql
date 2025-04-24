@@ -12,7 +12,7 @@ SELECT
     ,aii.invoice_id
     ,aii.invoice_num
     ,LISTAGG( distinct air.reject_lookup_code, ', ') WITHIN GROUP (ORDER BY air.reject_lookup_code) reject_lookup_code
-    ,(SELECT count(*) FROM ap_invoices_interface WHERE LOAD_REQUEST_ID = :load_request_id ) failed_count
+    ,(SELECT count(*) FROM ap_invoices_interface WHERE LOAD_REQUEST_ID = :load_request_id and NVL(STATUS,'NA') <>'PROCESSED') failed_count
     ,aii.status
 FROM
      ap_interface_rejections air

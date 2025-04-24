@@ -1,10 +1,14 @@
 CREATE TABLE CHM_MSI_SUPPLIERS
 (
      CHM_MSI_SUPPLIER_ID   NUMBER  GENERATED ALWAYS AS IDENTITY
-    ,INSTALLER_NUMBER               VARCHAR2(4000) PRIMARY KEY
+    ,INSTALLER_NUMBER               VARCHAR2(4000) 
     ,SUPPLIER_NUMBER                VARCHAR2(4000)
     ,SUPPLIER_NAME                  VARCHAR2(4000)
     ,SUPPLIER_SITE                  VARCHAR2(4000)
+    ,SUPPLIER_ID                    NUMBER
+    ,SUPPLIER_SITE_ID               NUMBER PRIMARY KEY
+    ,BU_ID                          NUMBER
+    ,BU_NAME                        VARCHAR2(4000)
     ,ATTRIBUTE1                     VARCHAR2(4000) 
     ,ATTRIBUTE2                     VARCHAR2(4000) 
     ,ATTRIBUTE3                     VARCHAR2(4000) 

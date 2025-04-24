@@ -1,0 +1,10 @@
+CHMInstallerMasterSyncSFDCtoCHM
+CHMMsiShipmentDetailSyncERPtoCHM
+CHMMSISpaHeaderSyncSFDCtoCHM
+CHMMSISpaContactSyncSFDCtoCHM
+CHMMSISpaSystemObjectsSyncSFDCtoCHM
+CHMMSISpaDistiInstallerSyncSFDCtoCHM
+CHMMSIAPInvoiceSyncCHMToERP
+
+
+ENE_AP_MSI_BU_NAME

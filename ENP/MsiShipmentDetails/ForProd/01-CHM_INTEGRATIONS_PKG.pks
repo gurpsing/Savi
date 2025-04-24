@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE CHM_INTEGRATIONS_PKG
+create or replace PACKAGE CHM_INTEGRATIONS_PKG
     
     /*************************************************************************************************************************************************************************
     * Type                           : PL/SQL Package Specification                                                                                                          *
@@ -15,7 +15,7 @@ CREATE OR REPLACE PACKAGE CHM_INTEGRATIONS_PKG
    *************************************************************************************************************************************************************************/
 
 AS
-    
+
     --Procedure to validate integration and update integrations & integration runs table
     PROCEDURE VALIDATE_INTEGRATION(
         P_IN_INTEGRATION_IDENTIFIER     IN      VARCHAR2,
@@ -42,9 +42,9 @@ AS
         P_OUT_STATUS                    OUT     VARCHAR2,
         P_OUT_MESSAGE                   OUT     VARCHAR2
     );
-    
+
     --Additions for v1.2 starts
-    
+
     --Procedure to update integration run table   
     PROCEDURE FINISH_INTEGRATION_RUN (
          P_IN_OIC_INSTANCE_ID               IN VARCHAR2
@@ -52,22 +52,22 @@ AS
         ,P_OUT_TOTAL_SUCCESS_RECORDS        OUT NUMBER
         ,P_OUT_TOTAL_ERROR_RECORDS          OUT NUMBER
     );
-    
-    
+
+
     --Procedure to update log
     PROCEDURE UPDATE_LOG (
          P_IN_LOG                IN VARCHAR2
         ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
     );
-    
+
     --Procedure to check if any record failed
     PROCEDURE CHECK_FAILED_RECORDS (
         P_IN_OIC_INSTANCE_ID    IN VARCHAR2
     );
-    
+
     --Additions for v1.2 ends
-    
-    
-    
+
+
+
 END CHM_INTEGRATIONS_PKG;
 /

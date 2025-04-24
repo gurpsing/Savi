@@ -22,11 +22,16 @@ AS
     BEGIN
         --Update Invoice Headers
         UPDATE  CHM_MSI_CLAIM_AP_INVOICE_HEADER hdr
-        SET      OIC_INSTANCE_ID    = P_IN_OIC_INSTANCE_ID
-                ,BU_NAME            = (SELECT description       FROM chm_msi_ap_bu_name_lookup lkp WHERE lkp.lookup_code = hdr.country and rownum=1)
-                ,SUPPLIER_NUMBER    = (SELECT supplier_number   FROM CHM_MSI_SUPPLIERS sup WHERE sup.INSTALLER_NUMBER = hdr.INSTALLER_NUMBER and rownum=1)
-                ,SUPPLIER_NAME      = (SELECT supplier_name     FROM CHM_MSI_SUPPLIERS sup WHERE sup.INSTALLER_NUMBER = hdr.INSTALLER_NUMBER and rownum=1)
-                ,SUPPLIER_SITE      = (SELECT supplier_site     FROM CHM_MSI_SUPPLIERS sup WHERE sup.INSTALLER_NUMBER = hdr.INSTALLER_NUMBER and rownum=1)
+        SET      OIC_INSTANCE_ID        = P_IN_OIC_INSTANCE_ID
+                ,BU_NAME                = (SELECT description       FROM chm_msi_ap_bu_name_lookup lkp WHERE lkp.lookup_code = hdr.country and rownum=1)
+                ,SUPPLIER_NUMBER        = (SELECT supplier_number   FROM CHM_MSI_SUPPLIERS sup WHERE sup.INSTALLER_NUMBER = hdr.INSTALLER_NUMBER and rownum=1)
+                ,SUPPLIER_NAME          = (SELECT supplier_name     FROM CHM_MSI_SUPPLIERS sup WHERE sup.INSTALLER_NUMBER = hdr.INSTALLER_NUMBER and rownum=1)
+                ,SUPPLIER_SITE          = (SELECT supplier_site     FROM CHM_MSI_SUPPLIERS sup WHERE sup.INSTALLER_NUMBER = hdr.INSTALLER_NUMBER and rownum=1)
+                ,LOAD_REQUEST_ID	    = NULL 
+                ,LOAD_REQUEST_STATUS    = NULL	
+                ,IMPORT_REQUEST_ID	    = NULL
+                ,IMPORT_REQUEST_STATUS  = NULL
+                ,REJECTION_REASON  = NULL
         where   ORACLE_AP_INTERFACE_STATUS IN ('NEW', 'REJECTED');
         COMMIT;
         
