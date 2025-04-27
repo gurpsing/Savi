@@ -42,7 +42,11 @@ AS
         where   ORACLE_AP_INTERFACE_STATUS IN ('NEW', 'REJECTED');
         COMMIT;
         
-        FOR rec IN (    SELECT DISTINCT bu_name FROM CHM_MSI_CLAIM_AP_INVOICE_HEADER inv 
+        FOR rec IN (    SELECT DISTINCT bu_name,(   select meaning  from chm_lookup_values_v1
+                                                    where lookup_type = 'CHM_MSI_AP_INVOICE_SETUP'
+                                                    and lookup_code='DIST_CODE_COMBINATION' and rownum=1
+                                                ) DIST_CODE_COMBINATION 
+                        FROM CHM_MSI_CLAIM_AP_INVOICE_HEADER inv 
                         WHERE  bu_name IS NOT NULL AND OIC_INSTANCE_ID = P_IN_OIC_INSTANCE_ID )
         LOOP
             SELECT 
@@ -58,7 +62,7 @@ AS
             SET
                 IMPORT_SET = l_import_set 
                 ,DIST_CODE_COMBINATION = (SELECT TAG FROM chm_msi_ap_bu_name_lookup lkp WHERE lkp.description = line.bu_name and rownum=1 )
-                                        ||'.0000.213000.000.00000.A00.000.0000'
+                                        ||rec.DIST_CODE_COMBINATION
             WHERE bu_name = rec.bu_name and oic_instance_id = P_IN_OIC_INSTANCE_ID;
             
             COMMIT;
