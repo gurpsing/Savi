@@ -42,10 +42,7 @@ AS
         where   ORACLE_AP_INTERFACE_STATUS IN ('NEW', 'REJECTED');
         COMMIT;
         
-        FOR rec IN (    SELECT DISTINCT bu_name,(   select meaning  from chm_lookup_values_v1
-                                                    where lookup_type = 'CHM_MSI_AP_INVOICE_SETUP'
-                                                    and lookup_code='DIST_CODE_COMBINATION' and rownum=1
-                                                ) DIST_CODE_COMBINATION 
+        FOR rec IN (    SELECT DISTINCT bu_name 
                         FROM CHM_MSI_CLAIM_AP_INVOICE_HEADER inv 
                         WHERE  bu_name IS NOT NULL AND OIC_INSTANCE_ID = P_IN_OIC_INSTANCE_ID )
         LOOP
@@ -53,16 +50,16 @@ AS
                 CHM_MSI_AP_INV_IMPORT_SET_SEQ.NEXTVAL INTO l_import_set
             FROM DUAL;
             
-            UPDATE CHM_MSI_CLAIM_AP_INVOICE_HEADER
+            UPDATE CHM_MSI_CLAIM_AP_INVOICE_HEADER hdr
             SET
-                IMPORT_SET = l_import_set 
+                 IMPORT_SET = l_import_set 
+                ,payment_term    = (SELECT payment_term FROM chm_msi_ap_bu_name_lookup lkp WHERE lkp.lookup_code = hdr.country and rownum=1)
             WHERE bu_name = rec.bu_name and oic_instance_id = P_IN_OIC_INSTANCE_ID;
             
             UPDATE CHM_MSI_CLAIM_AP_INVOICES line
             SET
                 IMPORT_SET = l_import_set 
                 ,DIST_CODE_COMBINATION = (SELECT TAG FROM chm_msi_ap_bu_name_lookup lkp WHERE lkp.description = line.bu_name and rownum=1 )
-                                        ||rec.DIST_CODE_COMBINATION
             WHERE bu_name = rec.bu_name and oic_instance_id = P_IN_OIC_INSTANCE_ID;
             
             COMMIT;
