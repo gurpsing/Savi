@@ -1,0 +1,34 @@
+SELECT papf.person_number
+      ,loc_tl.location_code
+	  ,hle.name
+  FROM per_periods_of_service         ppos
+      ,per_all_assignments_m          paam
+      ,per_location_details_f         loc
+      ,per_location_details_f_tl      loc_tl
+      ,per_departments                dept
+	  ,hr_legal_entities              hle
+      ,per_all_people_f               papf
+      ,per_person_names_f             ppnf
+ WHERE ppos.period_type = 'E' 
+   AND ppos.primary_flag = 'Y' 
+   AND TRUNC(SYSDATE) BETWEEN ppos.date_start AND NVL(ppos.actual_termination_date,TRUNC(SYSDATE))
+   AND paam.period_of_service_id = ppos.period_of_service_id
+   AND paam.primary_flag = 'Y' 
+   AND paam.assignment_type = 'E' 
+   AND paam.effective_latest_change = 'Y' 
+   AND TRUNC(SYSDATE) BETWEEN paam.effective_start_date AND paam.effective_end_date 
+   AND loc.location_id = paam.location_id
+   AND TRUNC(SYSDATE) BETWEEN loc.effective_start_date AND loc.effective_end_date
+   AND loc_tl.location_details_id = loc.location_details_id
+   AND loc_tl.language = 'US' 
+   AND TRUNC(SYSDATE) BETWEEN loc_tl.effective_start_date AND loc_tl.effective_end_date
+   AND dept.organization_id = paam.organization_id
+   AND TRUNC(SYSDATE) BETWEEN dept.effective_start_date AND dept.effective_end_date
+   AND hle.organization_id = ppos.legal_entity_id
+   AND hle.classification_code = 'HCM_LEMP' 
+   AND TRUNC(SYSDATE) BETWEEN hle.effective_start_date AND hle.effective_end_date
+   AND papf.person_id = ppos.person_id 
+   AND TRUNC(SYSDATE) BETWEEN papf.effective_start_date AND papf.effective_end_date
+   AND ppnf.person_id = ppos.person_id
+   AND ppnf.name_type = 'GLOBAL'
+   AND TRUNC(SYSDATE) BETWEEN ppnf.effective_start_date AND ppnf.effective_end_date

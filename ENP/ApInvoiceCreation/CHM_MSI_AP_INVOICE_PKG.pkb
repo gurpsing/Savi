@@ -37,8 +37,12 @@ AS
         
         --Update Invoice Lines
         UPDATE  CHM_MSI_CLAIM_AP_INVOICES line
-        SET      OIC_INSTANCE_ID = P_IN_OIC_INSTANCE_ID
-                ,BU_NAME = (SELECT bu_name FROM CHM_MSI_CLAIM_AP_INVOICE_HEADER hdr WHERE hdr.oracle_ap_invoice_id = line.oracle_ap_invoice_id and rownum=1)
+        SET      OIC_INSTANCE_ID        = P_IN_OIC_INSTANCE_ID
+                ,BU_NAME                = (SELECT bu_name FROM CHM_MSI_CLAIM_AP_INVOICE_HEADER hdr WHERE hdr.oracle_ap_invoice_id = line.oracle_ap_invoice_id and rownum=1)
+                ,LOAD_REQUEST_ID	    = NULL 
+                ,LOAD_REQUEST_STATUS    = NULL	
+                ,IMPORT_REQUEST_ID	    = NULL
+                ,IMPORT_REQUEST_STATUS  = NULL
         where   ORACLE_AP_INTERFACE_STATUS IN ('NEW', 'REJECTED');
         COMMIT;
         
@@ -68,6 +72,61 @@ AS
 
 
     END GROUP_INVOICES;
+    
+    
+    --Procedure to update import request status
+    PROCEDURE UPDATE_IMPORT_REQ_STATUS (
+         P_IN_LOAD_REQUEST_ID       IN VARCHAR2
+        ,P_IN_IMPORT_REQUEST_ID     IN VARCHAR2
+        ,P_IN_IMPORT_REQUEST_STATUS IN VARCHAR2
+        ,P_OUT_TOTAL_RECORDS        OUT NUMBER
+    )
+    AS
+    BEGIN
+        
+        UPDATE CHM_MSI_CLAIM_AP_INVOICE_HEADER 
+        SET  IMPORT_REQUEST_ID      = P_IN_IMPORT_REQUEST_ID
+            ,IMPORT_REQUEST_STATUS  = P_IN_IMPORT_REQUEST_STATUS 
+        WHERE LOAD_REQUEST_ID       = P_IN_LOAD_REQUEST_ID;
+        
+        UPDATE CHM_MSI_CLAIM_AP_INVOICES 
+        SET  IMPORT_REQUEST_ID      = P_IN_IMPORT_REQUEST_ID
+            ,IMPORT_REQUEST_STATUS  = P_IN_IMPORT_REQUEST_STATUS 
+        WHERE LOAD_REQUEST_ID       = P_IN_LOAD_REQUEST_ID;
+        
+        COMMIT;
+        
+        SELECT COUNT(*) INTO P_OUT_TOTAL_RECORDS
+        FROM CHM_MSI_CLAIM_AP_INVOICE_HEADER 
+        WHERE 
+        load_request_id = P_IN_LOAD_REQUEST_ID;
+        
+    END UPDATE_IMPORT_REQ_STATUS;
+    
+    --Procedure to update interface status
+    PROCEDURE UPDATE_INTERFACE_STATUS (
+         P_IN_LOAD_REQUEST_ID       IN VARCHAR2
+        ,P_IN_INVOICE_ID            IN VARCHAR2
+        ,P_IN_REJECTION_REASON      IN VARCHAR2
+        ,P_IN_INTERFACE_STATUS      IN VARCHAR2
+    )
+    AS
+    BEGIN
+    
+        UPDATE  CHM_MSI_CLAIM_AP_INVOICE_HEADER 
+        SET     REJECTION_REASON            = P_IN_REJECTION_REASON
+               ,ORACLE_AP_INTERFACE_STATUS  = P_IN_INTERFACE_STATUS 
+        WHERE   LOAD_REQUEST_ID             = P_IN_LOAD_REQUEST_ID 
+        AND     ORACLE_AP_INVOICE_ID        = P_IN_INVOICE_ID ;
+
+        UPDATE CHM_MSI_CLAIM_AP_INVOICES 
+        SET     ORACLE_AP_INTERFACE_STATUS  = P_IN_INTERFACE_STATUS 
+        WHERE   LOAD_REQUEST_ID             = P_IN_LOAD_REQUEST_ID 
+        AND     ORACLE_AP_INVOICE_ID        = P_IN_INVOICE_ID ; 
+        
+        COMMIT;
+        
+    END UPDATE_INTERFACE_STATUS;
 
 END CHM_MSI_AP_INVOICE_PKG;
 /
