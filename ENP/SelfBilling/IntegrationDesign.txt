@@ -1,0 +1,22 @@
+We need to create a wrapper integration
+
+    Parameters:
+        1. From Date 
+        2. To Date
+        3. Installer Name (NA)
+        4. Invoice Number (NA)
+        
+    1. Run the report to fetch those invoices which has attribute9 <> 'SENT':
+        Invoice_Id
+        Invoice_Number
+        To_Email
+    
+    2. Loop through data fetched, for each invoice run the Self Billing Report
+    
+        2.1 Download report output as PDF
+        
+        2.2 Sent it through OIC Notification
+        
+        2.3 Update the DFF
+    
+    

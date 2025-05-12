@@ -1,0 +1,46 @@
+--------------------------------------------------------
+--  File created - Thursday-April-24-2025   
+--------------------------------------------------------
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_DETAILS_ALL_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_DISTI_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_DISTRIBUTOR_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_GEO_DETAILS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_GEO_DETAILS_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_HEADER_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_HEADER_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_INSTALLERS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_INSTALLER_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_LINES_ALL_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_PAYEE_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_PRODUCTS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_SYSTEM_ATTACHMENTS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_SYSTEM_ATTACHMENT_LINES_ALL_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_SYSTEM_SIZE_LINES_ALL_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_UNIT_ACTIVATION_LINES_ALL_V5.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SPA_UNIT_ACTIVATION_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SYS_SIZE_INCENTIVE_CHM_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SYS_SIZE_INCENTIVE_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SYS_SIZE_INCENTIVE_V1.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_DEBUG_LOG_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_ENLIGHTEN_DEVICE_ATTRIBUTES_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_ENLIGHTEN_DEVICE_ATTRIBUTES_V1.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_ENLIGHTEN_DEVICE_DETAILS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_ENLIGHTEN_DEVICE_REBATES_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_ENLIGHTEN_SITE_DEVICE_ATTRIBUTES_V1.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_ENLIGHTEN_SITE_MASTER_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_AP_INVOICES_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_AP_INVOICE_HEADER_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_BATCH_EXCEPTIONS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_BATCH_HEADER_AV.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_BATCH_LINES_AV.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_BATCH_PAYEE_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_FILES_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_LOGS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_REBATES_REPORT_V1.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_REJECT_REASONS_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_REQUEST_APPROVAL_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_REQUEST_SUMMARY_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_CLAIM_REQUEST_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_LOOKUP_VALUES_V1.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_SFDC_ACCOUNT_MASTER_V.sql
+@C:\Users\TC-User\OneDrive - Enphase Energy\Desktop\SIT BACKUPS 24_4\VIEWS\CHM_MSI_SHIP_DETAILS_TBL_V.sql

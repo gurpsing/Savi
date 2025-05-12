@@ -1,0 +1,5 @@
+--------------------------------------------------------
+--  DDL for Sequence CHM_ENLIGHTEN_DEVICE_DETAILS_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "CHM_ENLIGHTEN_DEVICE_DETAILS_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 219078 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;

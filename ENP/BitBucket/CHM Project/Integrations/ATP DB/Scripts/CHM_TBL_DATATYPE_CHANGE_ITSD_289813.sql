@@ -1,0 +1,690 @@
+/* CHM_ACCOUNTING_PERIODS */
+
+Create table CHM_ACCOUNTING_PERIODS_bkp_201124
+as select * from CHM_ACCOUNTING_PERIODS;
+/
+alter table CHM_ACCOUNTING_PERIODS ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_ACCOUNTING_PERIODS
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_VALUE_SET_ID = CHM_VALUE_SET_ID;
+/ 
+Commit;
+/ 
+Update CHM_ACCOUNTING_PERIODS
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_ACCOUNTING_PERIODS MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_ACCOUNTING_PERIODS 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_VALUE_SET_ID = CHM_VALUE_SET_ID;
+/
+Commit;
+/
+alter table CHM_ACCOUNTING_PERIODS drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_AR_TRX_TYPES */
+
+Create table CHM_AR_TRX_TYPES_bkp_201124
+as select * from CHM_AR_TRX_TYPES;
+/
+alter table CHM_AR_TRX_TYPES ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_AR_TRX_TYPES
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_TRX_TYPE_ID = CHM_TRX_TYPE_ID;
+/ 
+Commit;
+/ 
+Update CHM_AR_TRX_TYPES
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_AR_TRX_TYPES MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_AR_TRX_TYPES 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_TRX_TYPE_ID = CHM_TRX_TYPE_ID;
+/
+Commit;
+/
+alter table CHM_AR_TRX_TYPES drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_CALENDARS */
+
+Create table CHM_CALENDARS_bkp_201124
+as select * from CHM_CALENDARS;
+/
+alter table CHM_CALENDARS ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_CALENDARS
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_CALENDAR_ID = CHM_CALENDAR_ID;
+/ 
+Commit;
+/ 
+Update CHM_CALENDARS
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_CALENDARS MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_CALENDARS 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_CALENDAR_ID = CHM_CALENDAR_ID;
+/
+Commit;
+/
+alter table CHM_CALENDARS drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_CURRENCIES */
+
+Create table CHM_CURRENCIES_bkp_201124
+as select * from CHM_CURRENCIES;
+/
+alter table CHM_CURRENCIES ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_CURRENCIES
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_CURRENCY_ID = CHM_CURRENCY_ID;
+/ 
+Commit;
+/ 
+Update CHM_CURRENCIES
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_CURRENCIES MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_CURRENCIES 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_CURRENCY_ID = CHM_CURRENCY_ID;
+/
+Commit;
+/
+alter table CHM_CURRENCIES drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_DIST_ACCOUNTS */
+
+Create table CHM_DIST_ACCOUNTS_bkp_201124
+as select * from CHM_DIST_ACCOUNTS;
+/
+alter table CHM_DIST_ACCOUNTS ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_DIST_ACCOUNTS
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_DIST_ACCOUNT_ID = CHM_DIST_ACCOUNT_ID;
+/ 
+Commit;
+/ 
+Update CHM_DIST_ACCOUNTS
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_DIST_ACCOUNTS MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_DIST_ACCOUNTS 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_DIST_ACCOUNT_ID = CHM_DIST_ACCOUNT_ID;
+/
+Commit;
+/
+alter table CHM_DIST_ACCOUNTS drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_DIST_SITE_USES */
+
+Create table CHM_DIST_SITE_USES_bkp_201124
+as select * from CHM_DIST_SITE_USES;
+/
+alter table CHM_DIST_SITE_USES ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_DIST_SITE_USES
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_DIST_SITE_USES_ID = CHM_DIST_SITE_USES_ID;
+/ 
+Commit;
+/ 
+Update CHM_DIST_SITE_USES
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_DIST_SITE_USES MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_DIST_SITE_USES 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_DIST_SITE_USES_ID = CHM_DIST_SITE_USES_ID;
+/
+Commit;
+/
+alter table CHM_DIST_SITE_USES drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_EXCHANGE_RATES */
+
+Create table CHM_EXCHANGE_RATES_bkp_201124
+as select * from CHM_EXCHANGE_RATES;
+/
+alter table CHM_EXCHANGE_RATES ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_EXCHANGE_RATES
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_EXCHANGE_RATE_ID = CHM_EXCHANGE_RATE_ID;
+/ 
+Commit;
+/ 
+Update CHM_EXCHANGE_RATES
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_EXCHANGE_RATES MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_EXCHANGE_RATES 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_EXCHANGE_RATE_ID = CHM_EXCHANGE_RATE_ID;
+/
+Commit;
+/
+alter table CHM_EXCHANGE_RATES drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_INTEGRATIONS */
+
+Create table CHM_INTEGRATIONS_bkp_201124
+as select * from CHM_INTEGRATIONS;
+/
+alter table CHM_INTEGRATIONS ADD LAST_RUN_ID1 varchar2(4000);
+/
+Update CHM_INTEGRATIONS
+set LAST_RUN_ID1 = LAST_RUN_ID
+where CHM_INTEGRATION_ID = CHM_INTEGRATION_ID;
+/ 
+Commit;
+/ 
+Update CHM_INTEGRATIONS
+set LAST_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_INTEGRATIONS MODIFY LAST_RUN_ID VARCHAR2(4000);
+/
+Update CHM_INTEGRATIONS 
+set LAST_RUN_ID = LAST_RUN_ID1
+where CHM_INTEGRATION_ID = CHM_INTEGRATION_ID;
+/
+Commit;
+/
+alter table CHM_INTEGRATIONS drop column LAST_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_ITEM_CATEGORIES */
+
+Create table CHM_ITEM_CATEGORIES_bkp_201124
+as select * from CHM_ITEM_CATEGORIES;
+/
+alter table CHM_ITEM_CATEGORIES ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_ITEM_CATEGORIES
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_ITEM_CATEGORY_ID = CHM_ITEM_CATEGORY_ID;
+/ 
+Commit;
+/ 
+Update CHM_ITEM_CATEGORIES
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_ITEM_CATEGORIES MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_ITEM_CATEGORIES 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_ITEM_CATEGORY_ID = CHM_ITEM_CATEGORY_ID;
+/
+Commit;
+/
+alter table CHM_ITEM_CATEGORIES drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_ITEM_CATEGORY_ASSIGNMENTS */
+
+Create table CHM_ITEM_CATEGORY_ASSIGNMENTS_bkp_201124
+as select * from CHM_ITEM_CATEGORY_ASSIGNMENTS;
+/
+alter table CHM_ITEM_CATEGORY_ASSIGNMENTS ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_ITEM_CATEGORY_ASSIGNMENTS
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_ITEM_CAT_ASSIGN_ID = CHM_ITEM_CAT_ASSIGN_ID;
+/ 
+Commit;
+/ 
+Update CHM_ITEM_CATEGORY_ASSIGNMENTS
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_ITEM_CATEGORY_ASSIGNMENTS MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_ITEM_CATEGORY_ASSIGNMENTS 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_ITEM_CAT_ASSIGN_ID = CHM_ITEM_CAT_ASSIGN_ID;
+/
+Commit;
+/
+alter table CHM_ITEM_CATEGORY_ASSIGNMENTS drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_ITEM_CATEGORY_SETS */
+
+Create table CHM_ITEM_CATEGORY_SETS_bkp_201124
+as select * from CHM_ITEM_CATEGORY_SETS;
+/
+alter table CHM_ITEM_CATEGORY_SETS ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_ITEM_CATEGORY_SETS
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_ITEM_CATEGORY_SET_ID = CHM_ITEM_CATEGORY_SET_ID;
+/ 
+Commit;
+/ 
+Update CHM_ITEM_CATEGORY_SETS
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_ITEM_CATEGORY_SETS MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_ITEM_CATEGORY_SETS 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_ITEM_CATEGORY_SET_ID = CHM_ITEM_CATEGORY_SET_ID;
+/
+Commit;
+/
+alter table CHM_ITEM_CATEGORY_SETS drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_ITEMS */
+
+Create table CHM_ITEMS_bkp_201124
+as select * from CHM_ITEMS;
+/
+alter table CHM_ITEMS ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_ITEMS
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_ITEM_ID = CHM_ITEM_ID;
+/ 
+Commit;
+/ 
+Update CHM_ITEMS
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_ITEMS MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_ITEMS 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_ITEM_ID = CHM_ITEM_ID;
+/
+Commit;
+/
+alter table CHM_ITEMS drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_LEDGERS */
+
+Create table chm_ledgers_bkp_201124
+as select * from chm_ledgers;
+/
+alter table chm_ledgers ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update chm_ledgers
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_LEDGER_ID = CHM_LEDGER_ID;
+/ 
+Commit;
+/ 
+Update chm_ledgers
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table chm_ledgers MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update chm_ledgers 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_LEDGER_ID = CHM_LEDGER_ID;
+/
+Commit;
+/
+alter table chm_ledgers drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_ORGANIZATION_UNITS */
+
+Create table CHM_ORGANIZATION_UNITS_bkp_201124
+as select * from CHM_ORGANIZATION_UNITS;
+/
+alter table CHM_ORGANIZATION_UNITS ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_ORGANIZATION_UNITS
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_ORG_ID = CHM_ORG_ID;
+/ 
+Commit;
+/ 
+Update CHM_ORGANIZATION_UNITS
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_ORGANIZATION_UNITS MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_ORGANIZATION_UNITS 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_ORG_ID = CHM_ORG_ID;
+/
+Commit;
+/
+alter table CHM_ORGANIZATION_UNITS drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_PRICE_LIST_ITEMS */
+
+Create table CHM_PRICE_LIST_ITEMS_bkp_201124
+as select * from CHM_PRICE_LIST_ITEMS;
+/
+alter table CHM_PRICE_LIST_ITEMS ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_PRICE_LIST_ITEMS
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_PRICE_LIST_ITEM_ID = CHM_PRICE_LIST_ITEM_ID;
+/ 
+Commit;
+/ 
+Update CHM_PRICE_LIST_ITEMS
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_PRICE_LIST_ITEMS MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_PRICE_LIST_ITEMS 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_PRICE_LIST_ITEM_ID = CHM_PRICE_LIST_ITEM_ID;
+/
+Commit;
+/
+alter table CHM_PRICE_LIST_ITEMS drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_PRICE_LISTS */
+
+Create table CHM_PRICE_LISTS_bkp_201124
+as select * from CHM_PRICE_LISTS;
+/
+alter table CHM_PRICE_LISTS ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_PRICE_LISTS
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_PRICE_LIST_ID = CHM_PRICE_LIST_ID;
+/ 
+Commit;
+/ 
+Update CHM_PRICE_LISTS
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_PRICE_LISTS MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_PRICE_LISTS 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_PRICE_LIST_ID = CHM_PRICE_LIST_ID;
+/
+Commit;
+/
+alter table CHM_PRICE_LISTS drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_SHIP_DETAILS_TBL */
+
+Create table CHM_SHIP_DETAILS_TBL_bkp_201124
+as select * from CHM_SHIP_DETAILS_TBL;
+/
+alter table CHM_SHIP_DETAILS_TBL ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_SHIP_DETAILS_TBL
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CIE_SHIP_DETAIL_ID = CIE_SHIP_DETAIL_ID;
+/ 
+Commit;
+/ 
+Update CHM_SHIP_DETAILS_TBL
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_SHIP_DETAILS_TBL MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_SHIP_DETAILS_TBL 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CIE_SHIP_DETAIL_ID = CIE_SHIP_DETAIL_ID;
+/
+Commit;
+/
+alter table CHM_SHIP_DETAILS_TBL drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_STATE_PROVINCE */
+
+Create table CHM_STATE_PROVINCE_bkp_201124
+as select * from CHM_STATE_PROVINCE;
+/
+alter table CHM_STATE_PROVINCE ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_STATE_PROVINCE
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_STATE_PROVINCE_ID = CHM_STATE_PROVINCE_ID;
+/ 
+Commit;
+/ 
+Update CHM_STATE_PROVINCE
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_STATE_PROVINCE MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_STATE_PROVINCE 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_STATE_PROVINCE_ID = CHM_STATE_PROVINCE_ID;
+/
+Commit;
+/
+alter table CHM_STATE_PROVINCE drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_TERRITORIES */
+
+Create table CHM_TERRITORIES_bkp_201124
+as select * from CHM_TERRITORIES;
+/
+alter table CHM_TERRITORIES ADD OIC_INSTANCE_ID1 varchar2(4000);
+/
+Update CHM_TERRITORIES
+set OIC_INSTANCE_ID1 = OIC_INSTANCE_ID
+where CHM_TERRITORY_ID = CHM_TERRITORY_ID;
+/ 
+Commit;
+/ 
+Update CHM_TERRITORIES
+set OIC_INSTANCE_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_TERRITORIES MODIFY OIC_INSTANCE_ID VARCHAR2(4000);
+/
+Update CHM_TERRITORIES 
+set OIC_INSTANCE_ID = OIC_INSTANCE_ID1
+where CHM_TERRITORY_ID = CHM_TERRITORY_ID;
+/
+Commit;
+/
+alter table CHM_TERRITORIES drop column OIC_INSTANCE_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_UOM_MASTER */
+
+Create table CHM_UOM_MASTER_bkp_201124
+as select * from CHM_UOM_MASTER;
+/
+alter table CHM_UOM_MASTER ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_UOM_MASTER
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_UOM_ID = CHM_UOM_ID;
+/ 
+Commit;
+/ 
+Update CHM_UOM_MASTER
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_UOM_MASTER MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_UOM_MASTER 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_UOM_ID = CHM_UOM_ID;
+/
+Commit;
+/
+alter table CHM_UOM_MASTER drop column OIC_RUN_ID1;
+/
+commit;
+/
+
+
+
+/* CHM_VALUE_SETS */
+
+Create table CHM_VALUE_SETS_bkp_201124
+as select * from CHM_VALUE_SETS;
+/
+alter table CHM_VALUE_SETS ADD OIC_RUN_ID1 varchar2(4000);
+/
+Update CHM_VALUE_SETS
+set OIC_RUN_ID1 = OIC_RUN_ID
+where CHM_VALUE_SET_ID = CHM_VALUE_SET_ID;
+/ 
+Commit;
+/ 
+Update CHM_VALUE_SETS
+set OIC_RUN_ID = NULL; 
+/
+Commit;
+/
+alter table CHM_VALUE_SETS MODIFY OIC_RUN_ID VARCHAR2(4000);
+/
+Update CHM_VALUE_SETS 
+set OIC_RUN_ID = OIC_RUN_ID1
+where CHM_VALUE_SET_ID = CHM_VALUE_SET_ID;
+/
+Commit;
+/
+alter table CHM_VALUE_SETS drop column OIC_RUN_ID1;
+/
+commit;
+/

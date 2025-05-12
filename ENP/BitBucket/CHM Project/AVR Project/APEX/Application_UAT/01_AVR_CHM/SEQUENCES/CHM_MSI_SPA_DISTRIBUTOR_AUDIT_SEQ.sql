@@ -1,0 +1,5 @@
+--------------------------------------------------------
+--  DDL for Sequence CHM_MSI_SPA_DISTRIBUTOR_AUDIT_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "CHM_MSI_SPA_DISTRIBUTOR_AUDIT_SEQ"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 335 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;

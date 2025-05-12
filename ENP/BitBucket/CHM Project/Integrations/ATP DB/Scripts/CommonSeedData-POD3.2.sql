@@ -1,0 +1,20 @@
+--CHM_LOOKUP_TYPES    
+BEGIN
+	INSERT INTO CHM_LOOKUP_TYPES (CHM_SOURCE_SYSTEM_ID, SOURCE_APPLICATION_ID, LOOKUP_TYPE, MEANING, DESCRIPTION) VALUES ('1', '-1', 'CHM_INSTALLER_RECORD_TYPE_RESTRICTION', 'Installer Record Type Restriction for Installer Master Sync', 'Installer Record Type Restriction for Installer Master Sync');
+
+    dbms_output.put_line('Data inserted for CHM_LOOKUP_TYPES');
+END;
+/
+
+--CHM_LOOKUP_VALUES
+BEGIN
+	INSERT INTO CHM_LOOKUP_VALUES (CHM_LOOKUP_TYPE_ID, DISPLAY_SEQUENCE, LOOKUP_CODE, MEANING, DESCRIPTION) VALUES ((select CHM_LOOKUP_TYPE_ID from chm_lookup_types where LOOKUP_TYPE='CHM_INSTALLER_RECORD_TYPE_RESTRICTION' and CHM_SOURCE_SYSTEM_ID=1 and SOURCE_APPLICATION_ID=-1), 1, 'Installer','Installer', 'Installer Record Type');
+    
+    INSERT INTO CHM_LOOKUP_VALUES (CHM_LOOKUP_TYPE_ID, DISPLAY_SEQUENCE, LOOKUP_CODE, MEANING, DESCRIPTION) VALUES ((select CHM_LOOKUP_TYPE_ID from chm_lookup_types where LOOKUP_TYPE='CHM_INSTALLER_RECORD_TYPE_RESTRICTION' and CHM_SOURCE_SYSTEM_ID=1 and SOURCE_APPLICATION_ID=-1), 1, 'Distributor','Distributor', 'Distributor Record Type');
+    
+	dbms_output.put_line('Data inserted for CHM_LOOKUP_VALUES');
+END;
+/
+
+COMMIT;
+

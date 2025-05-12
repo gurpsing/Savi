@@ -76,6 +76,12 @@ AS
         ,P_OUT_DATA                  OUT    SYS_REFCURSOR             
     );
     
+    --Procedure to remove duplicate serial records   
+    PROCEDURE REMOVE_DUPLICATE_SERIALS (
+        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
+    );
+    
+    
     
 END CHM_MSI_SHIPMENT_DETAIL_PKG;
 /

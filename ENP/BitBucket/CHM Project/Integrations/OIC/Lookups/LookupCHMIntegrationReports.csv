@@ -1,0 +1,23 @@
+﻿DVM,LookupCHMIntegrationReports,Lookup for CHM Integration Reports storing Report Path
+Integration_Identifier,Report_Path
+CHMEXCHANGERATESSYNCERPTOCHM,/Custom/Channel Management/Exchange Rates Sync/ExchangeRatesSync.xdo
+CHMDISTRIBUTORACCOUNTSYNCERPTOCH,/Custom/Channel Management/Distributor Account Sync/DistributorAccountSync.xdo
+CHMDISTRIBUTORSITESANDUSESSYNCER,/Custom/Channel Management/Distributor Sites Site Uses Sync/DistributorSitesAndUsesSync.xdo
+CHMITEMCATEGORIESSYNCERPTOCHM,/Custom/Channel Management/Item Categories Sync/ItemCategoriesSync.xdo
+CHMITEMMASTERSYNCERPTOCHM,/Custom/Channel Management/Item Master Sync/ItemMasterSync.xdo
+CHMPRICELISTMASTERSYNCERPTOCHM,/Custom/Channel Management/Price List Master Sync/PriceListMasterSync.xdo
+CHMLOOKUPSSYNCERPTOCHM,/Custom/Channel Management/Lookups Sync/LookupsSync.xdo
+CHMLEDGERSSYNCERPTOCHM,/Custom/Channel Management/Ledgers Sync/LedgersSync.xdo
+CHMBUSINESSUNITSSYNCERPTOCHM,/Custom/Channel Management/Business Units Sync/BusinessUnitsSync.xdo
+CHMCALENDARSSYNCERPTOCHM,/Custom/Channel Management/Calendars Sync/CalendarsSync.xdo
+CHMCURRENCIESSYNCERPTOCHM,/Custom/Channel Management/Currencies Sync/CurrenciesSync.xdo
+CHMCOUNTRIESSYNCERPTOCHM,/Custom/Channel Management/Countries Sync/CountriesSync.xdo
+CHMARTRXTYPESSYNCERPTOCHM,/Custom/Channel Management/AR Transaction Types/ARTransactionTypesSync.xdo
+CHMMASTERUOMSYNCERPTOCHM,/Custom/Channel Management/Master UOM Sync/MasterUOMSync.xdo
+CHMSTATEPROVINCESYNCERPTOCHM,/Custom/Channel Management/State Province Sync/StateProvinceSync.xdo
+CHMVALUESETSSYNCERPTOCHM,/Custom/Channel Management/Value Sets Sync/ValueSetsSync.xdo
+CHMACCOUNTINGPERIODSSYNCERPTOCHM,/Custom/Channel Management/Accounting Periods Sync/AccountingPeriodsSync.xdo
+CHMITEMCATEGORIESSETSSYNERPTOCHM,/Custom/Channel Management/Item Categories Sets Sync/ItemCategoriesSetsSync.xdo
+CHMITEMCATASSIGNMENTSSYNERPTOCHM,/Custom/Channel Management/Item Category Assignments Sync/ItemCategoryAssignmentsSync.xdo
+CHMPRICELISTITEMSYNCERPTOCHM,/Custom/Channel Management/Price List Items Sync/PriceListIemsSync.xdo
+CHMSHIPMENTDETAILSYNCERPTOCHM,/Custom/Channel Management/Shipment Details Sync/ShipmentDetailSync.xdo

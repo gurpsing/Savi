@@ -1,0 +1,5 @@
+--------------------------------------------------------
+--  DDL for Sequence CHM_MSI_AP_INVOICE_NUMBER_SEQ
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "CHM_MSI_AP_INVOICE_NUMBER_SEQ"  MINVALUE 9000001 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 9000023 NOCACHE  NOORDER  NOCYCLE  NOKEEP  NOSCALE  GLOBAL ;

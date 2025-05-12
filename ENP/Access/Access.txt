@@ -1,0 +1,8 @@
+Wallet_ENPATPUATDB2:
+Username -    CHM_RO
+Password -    bWr%=JY-Y>EyT%57sRsB
+
+
+https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com
+Username:   monkumar@enphaseenergy.com
+Password:   welcome123

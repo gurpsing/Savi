@@ -1,0 +1,27 @@
+CREATE SEQUENCE CHM_SOURCE_SYSTEM_SEQ           INCREMENT BY 1 MINVALUE 1;
+
+CREATE TABLE CHM_SOURCE_SYSTEMS(
+     CHM_SOURCE_SYSTEM_ID   NUMBER    DEFAULT CHM_SOURCE_SYSTEM_SEQ.NEXTVAL PRIMARY KEY
+    ,SHORT_NAME             VARCHAR2(4000)      NOT NULL UNIQUE
+    ,NAME                   VARCHAR2(4000)      NOT NULL UNIQUE
+    ,DESCRIPTION            VARCHAR2(4000)   
+    ,URL                    VARCHAR2(4000)      UNIQUE
+    ,IS_SEEDED              CHAR(1)             DEFAULT 'Y'
+    ,ENABLED_FLAG           CHAR(1)             DEFAULT 'Y'
+    ,START_DATE_ACTIVE      DATE                DEFAULT SYSDATE
+    ,END_DATE_ACTIVE        DATE         
+    ,ATTRIBUTE1             VARCHAR2(4000)   
+    ,ATTRIBUTE2             VARCHAR2(4000)   
+    ,ATTRIBUTE3             VARCHAR2(4000)   
+    ,ATTRIBUTE4             VARCHAR2(4000)   
+    ,ATTRIBUTE5             VARCHAR2(4000)   
+    ,ATTRIBUTE6             VARCHAR2(4000)   
+    ,ATTRIBUTE7             VARCHAR2(4000)   
+    ,ATTRIBUTE8             VARCHAR2(4000)   
+    ,ATTRIBUTE9             VARCHAR2(4000)   
+    ,ATTRIBUTE10            VARCHAR2(4000)   
+    ,CREATED_BY             VARCHAR2(4000)      DEFAULT 'SEED_DATA'
+    ,CREATION_DATE          DATE                DEFAULT SYSDATE
+    ,LAST_UPDATED_BY        VARCHAR2(4000)      DEFAULT 'SEED_DATA'
+    ,LAST_UPDATE_DATE       DATE                DEFAULT SYSDATE
+);

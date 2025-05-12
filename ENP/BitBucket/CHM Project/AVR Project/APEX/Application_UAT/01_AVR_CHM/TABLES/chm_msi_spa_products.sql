@@ -1,0 +1,116 @@
+
+  CREATE TABLE "CHM_MSI_SPA_PRODUCTS" 
+   (	"CHM_PRODUCTS_ID" NUMBER, 
+	"ID" VARCHAR2(4000), 
+	"MSI_ELIGIBLE" VARCHAR2(4000), 
+	"MSI_SYSTEM_ATTACHMENT_ELIGIBLE" VARCHAR2(4000), 
+	"ATTRIBUTE_CONTEXT" VARCHAR2(4000), 
+	"ATTRIBUTE1" VARCHAR2(4000), 
+	"ATTRIBUTE2" VARCHAR2(4000), 
+	"ATTRIBUTE3" VARCHAR2(4000), 
+	"ATTRIBUTE4" VARCHAR2(4000), 
+	"ATTRIBUTE5" VARCHAR2(4000), 
+	"ATTRIBUTE6" VARCHAR2(4000), 
+	"ATTRIBUTE7" VARCHAR2(4000), 
+	"ATTRIBUTE8" VARCHAR2(4000), 
+	"ATTRIBUTE9" VARCHAR2(4000), 
+	"ATTRIBUTE10" VARCHAR2(4000), 
+	"ATTRIBUTE11" VARCHAR2(4000), 
+	"ATTRIBUTE12" VARCHAR2(4000), 
+	"ATTRIBUTE13" VARCHAR2(4000), 
+	"ATTRIBUTE14" VARCHAR2(4000), 
+	"ATTRIBUTE15" VARCHAR2(4000), 
+	"CREATED_BY" VARCHAR2(4000), 
+	"CREATION_DATE" TIMESTAMP (6) WITH TIME ZONE, 
+	"LAST_UPDATED_BY" VARCHAR2(4000), 
+	"LAST_UPDATED_DATE" TIMESTAMP (6) WITH TIME ZONE, 
+	"SOURCE_APP_ID" VARCHAR2(4000), 
+	"ENTERPRISE_ID" VARCHAR2(4000), 
+	"IP_ADDRESS" VARCHAR2(4000), 
+	"USER_AGENT" VARCHAR2(4000), 
+	"OIC_INSTANCE_ID" VARCHAR2(4000), 
+	"IS_ACTIVE" VARCHAR2(4000), 
+	"NAME" VARCHAR2(4000), 
+	"PRODUCT_CODE" VARCHAR2(4000), 
+	 PRIMARY KEY ("CHM_PRODUCTS_ID")
+  USING INDEX  ENABLE
+   ) ;
+
+  CREATE INDEX "CHM_MSI_SPA_PRODUCTS_ID_IDX" ON "CHM_MSI_SPA_PRODUCTS" ("ID") 
+  ;
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "BIU_CHM_MSI_SPA_PRODUCTS_TRG" 
+  BEFORE INSERT OR UPDATE ON CHM_MSI_SPA_PRODUCTS
+  FOR EACH ROW
+   BEGIN
+      IF INSERTING THEN
+        IF :new.CHM_PRODUCTS_ID  IS NULL THEN
+            :new.CHM_PRODUCTS_ID   := CHM_MSI_SPA_PRODUCTS_SEQ.NEXTVAL;
+        END IF;
+
+       -- :NEW.attribute10 := chm_util_pkg.removespecialwords(:NEW.NAME);
+
+        :NEW.CREATED_BY         := NVL(:NEW.CREATED_BY , CHM_UTIL_PKG.GETUSERNAME());
+        :NEW.CREATION_DATE      := NVL(:NEW.CREATION_DATE ,SYSTIMESTAMP);
+        :NEW.LAST_UPDATED_BY    := NVL(:NEW.LAST_UPDATED_BY, CHM_UTIL_PKG.GETUSERNAME());
+        :NEW.LAST_UPDATED_DATE   := NVL(:NEW.LAST_UPDATED_DATE ,SYSTIMESTAMP) ;
+        :NEW.IP_ADDRESS         := NVL(:NEW.IP_ADDRESS,CHM_UTIL_PKG.GETIPADDRESS());
+        :NEW.USER_AGENT         := NVL(:NEW.USER_AGENT,CHM_UTIL_PKG.GETUSERAGENT());
+
+        --We need to capture SYSDATE when CHM gets an update on Site 
+        --where the stage crosses 3
+        --Attribute 1 stores the date we captured that site crossed stage 3
+
+ /*   IF NVL(:NEW.STAGE,0) >=3 THEN
+          :NEW.ATTRIBUTE1 := TO_CHAR(SYSTIMESTAMP);
+        END IF; */
+
+
+      ELSIF updating THEN
+        --We need to capture SYSDATE when CHM gets an update on Site 
+        --where the stage crosses 3
+        -- We dont wnat to update if ATTRIBUTE1 already cpatured this date earlier
+        --so checking that OLD value is NULL and OLD stage is < 3 and new stage >=3
+
+        --Attribute 1 stores the date we captured that site crossed stage 3
+
+  /*      IF :OLD.ATTRIBUTE1 IS NULL AND NVL(:OLD.STAGE,0)< 3 AND NVL(:NEW.STAGE,0) >=3 THEN
+          :NEW.ATTRIBUTE1 := TO_CHAR(SYSTIMESTAMP);
+        END IF; */
+
+        :NEW.LAST_UPDATED_BY :=
+            CASE
+                WHEN :OLD.LAST_UPDATED_BY != :NEW.LAST_UPDATED_BY THEN
+                    :NEW.LAST_UPDATED_BY
+                ELSE CHM_UTIL_PKG.GETUSERNAME()
+            END;
+
+        :NEW.LAST_UPDATED_DATE :=
+            CASE
+                WHEN :OLD.LAST_UPDATED_DATE != :NEW.LAST_UPDATED_DATE THEN
+                    :NEW.LAST_UPDATED_DATE
+                ELSE SYSTIMESTAMP
+            END;
+
+        :NEW.IP_ADDRESS :=
+            CASE
+                WHEN :OLD.IP_ADDRESS != :NEW.IP_ADDRESS THEN
+                    :NEW.IP_ADDRESS
+                ELSE CHM_UTIL_PKG.GETIPADDRESS()
+            END;
+
+        :NEW.USER_AGENT :=
+            CASE
+                WHEN :OLD.USER_AGENT != :NEW.USER_AGENT THEN
+                    :NEW.USER_AGENT
+                ELSE CHM_UTIL_PKG.GETUSERAGENT()
+            END;
+
+        --:NEW.attribute10 := chm_util_pkg.removespecialwords(:NEW.NAME);
+              END IF;
+       EXCEPTION
+  WHEN OTHERS THEN
+    chm_msi_debug_api.log_msg(:new.CHM_PRODUCTS_ID , 'BIU_CHM_MSI_SPA_PRODUCTS_TRG', SQLERRM);
+    END;
+/
+ALTER TRIGGER "BIU_CHM_MSI_SPA_PRODUCTS_TRG" ENABLE;

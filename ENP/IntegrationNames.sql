@@ -7,4 +7,8 @@ CHMMSISpaDistiInstallerSyncSFDCtoCHM
 CHMMSIAPInvoiceSyncCHMToERP
 
 
+CHMMSISelfInvoiceDeliveryCHMToInstallers
+
 ENE_AP_MSI_BU_NAME
+
+

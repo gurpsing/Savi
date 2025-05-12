@@ -9,6 +9,7 @@ create or replace PACKAGE BODY CHM_MSI_SHIPMENT_DETAIL_PKG
 * Date          By                             Version          Details                                * 
 * -----------   ---------------------------    -------------    ---------------------------------------*
 * 05-Mar-2025   Gurpreet Singh                 1.0              Intial Version                         * 
+* 05-May-2025   Gurpreet Singh                 1.1              Changing Key Columns in UAT Testing    * 
 *******************************************************************************************************/    
 AS
     --Procedure to merge shipment data received from fusion   
@@ -17,9 +18,19 @@ AS
         ,P_IN_OIC_INSTANCE_ID    IN VARCHAR2
     ) AS
         L_COUNT         NUMBER := 0;
+        L_COUNT1        NUMBER := 0;
         L_MERGE_COUNT   NUMBER := 0;
         L_ERROR_MESSAGE VARCHAR2(30000);
     BEGIN
+        
+        L_COUNT1:=P_IN_CHM_MSI_SHIPMENT_DETAIL.LAST;
+        
+        UPDATE CHM_INTEGRATION_RUNS
+        SET      LOG    = LOG   ||CHR(10)||'Going to merge '||L_COUNT1 ||' records'
+                ,LAST_UPDATE_DATE           = SYSDATE
+        WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
+        COMMIT;
+        
         FOR I IN P_IN_CHM_MSI_SHIPMENT_DETAIL.FIRST..P_IN_CHM_MSI_SHIPMENT_DETAIL.LAST LOOP
             L_COUNT := L_COUNT + 1;
             BEGIN
@@ -234,7 +245,8 @@ AS
                 AND TBL.FULFILL_LINE_ID         = TMP.FULFILL_LINE_ID
                 AND TBL.DELIVERY_DETAIL_ID      = TMP.DELIVERY_DETAIL_ID 
                 AND TBL.DELIVERY_ASSIGNMENT_ID  = TMP.DELIVERY_ASSIGNMENT_ID 
-                AND TBL.SERIAL_NUMBER           = TMP.SERIAL_NUMBER;
+                AND TBL.SERIAL_NUMBER           = TMP.SERIAL_NUMBER
+                ;
 
 
                 L_MERGE_COUNT := L_MERGE_COUNT + 1;
@@ -318,6 +330,32 @@ AS
     END GET_DATES;
     
     
+    --Procedure to remove duplicate serial records   
+    PROCEDURE REMOVE_DUPLICATE_SERIALS (
+        P_IN_OIC_INSTANCE_ID    IN VARCHAR2
+    )
+    AS
+        ln_count NUMBER;
+    BEGIN
+        DELETE FROM chm_msi_ship_details_tbl
+        WHERE ROWID NOT IN (
+            SELECT rid FROM (
+                SELECT 
+                    ROWID AS rid,
+                    ROW_NUMBER() OVER (PARTITION BY SERIAL_NUMBER ORDER BY DELIVERY_DETAIL_ID DESC) AS rn
+                FROM chm_msi_ship_details_tbl
+            )
+            WHERE rn = 1
+        );
+        ln_count := SQL%ROWCOUNT ;
+        
+        UPDATE CHM_INTEGRATION_RUNS
+        SET     LOG                         = LOG   ||CHR(10)||'Removed ' ||ln_count ||' duplicate serial records' 
+                ,LAST_UPDATE_DATE           = SYSDATE
+        WHERE   CHM_INTEGRATION_RUN_ID      = P_IN_OIC_INSTANCE_ID;            
+        COMMIT;
+        
+    END REMOVE_DUPLICATE_SERIALS;
 
 END CHM_MSI_SHIPMENT_DETAIL_PKG;
 /
