@@ -113,4 +113,6 @@ AND hle.country             = ftv.territory_code
 AND psv.party_id            = ibm.payee_party_id (+)
 AND 'EMAIL'                 = ibm.remit_advice_delivery_method (+)
 AND SYSDATE BETWEEN NVL (xr.effective_from, SYSDATE - 1) AND NVL (xr.effective_to, SYSDATE + 1)
+AND aia.source              = 'MSI'
+AND aia.wfapproval_status   = 'WFAPPROVED'
 AND aia.invoice_num         = :INVOICE_NUMBER
