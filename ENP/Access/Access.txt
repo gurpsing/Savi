@@ -6,3 +6,33 @@ Password -    bWr%=JY-Y>EyT%57sRsB
 https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com
 Username:   monkumar@enphaseenergy.com
 Password:   welcome123
+
+
+https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com/
+SVC_INT_ADMIN:welcome123
+
+
+ReportServiceSOAPConnection
+https://fa-emrp-dev2-saasfaprod1.fa.ocs.oraclecloud.com:443/xmlpserver/services/ExternalReportWSSService?wsdl
+
+
+savsingh@enphaseenergy.com
+rnara@enphaseenergy.com
+harishaps@enphaseenergy.com
+rvarahagiri@enphaseenergy.com
+abnayak@enphaseenergy.com
+
+Anubha Singh <anubha.s@selectiva.com>, Lokesh Gupta <lokesh@selectiva.com>, Savinder Singh <savi@selectiva.com>
+Bharti Agrawal <bharti.a@selectiva.com>
+
+"/Custom/Financials/Payables/Invoices/Backup/Get Supplier Details Report New.xdo"
+
+
+
+--------------FTP----------------------
+Username:   OICINT_FS_DEV
+Hostname:   fs-oicdev-inst1-axz5gz8dbxhq-px.integration.us-phoenix-1.ocp.oraclecloud.com
+Port:       10111
+
+
+
