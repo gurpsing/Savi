@@ -11,12 +11,13 @@ SELECT  DISTINCT
      aia.invoice_id                                 AS INVOICE_ID
     ,aia.invoice_num                                AS INVOICE_NUMBER
     ,1                                              AS KEY
-    ,TO_CHAR(TRUNC(aia.invoice_date),'mm/dd/yyyy')  AS INVOICE_DATE
+    ,to_char(trunc(aia.invoice_date),'mm/dd/yyyy')  AS INVOICE_DATE
     ,(  SELECT 
-        TO_CHAR(TRUNC(aps.due_date),'mm/dd/yyyy') 
-        FROM AP_PAYMENT_SCHEDULES_ALL aps 
+         TO_CHAR(TRUNC(aps.due_date),'mm/dd/yyyy')
+        FROM ap_payment_schedules_all aps
         WHERE aps.invoice_id = aia.invoice_id
-    )                                               AS DUE_DATE  
+        AND ROWNUM=1
+    )                                               AS DUE_DATE
     ,aia.description                                AS DESCRIPTION
     ,aia.INVOICE_CURRENCY_CODE                      AS CUR
     ,TO_CHAR(aia.invoice_amount, 'FM9999999990.00') AS AMOUNT
@@ -50,9 +51,9 @@ SELECT  DISTINCT
 	,hle.Postal_Code                                AS Ship_Addr4
 	,ftv.territory_short_name                       AS Ship_Country
 	,ibm.remit_advice_email                         AS REMITTANCE_EMAIL 
-	,(  SELECT 
+    ,(  SELECT 
           TO_CHAR((NVL(zl.TAX_RATE,0)),'FM990.00')
-        FROM zx_lines_det_factors jtdfl,
+        FROM zx_lines_det_factors jtdfl
             ,zx_lines zl ,ap_invoices_all inv
         WHERE 1=1
         AND jtdfl.TRX_LINE_ID   = zl.TRX_LINE_ID
@@ -60,9 +61,10 @@ SELECT  DISTINCT
         AND inv.invoice_id      = jtdfl.trx_id
         AND inv.invoice_id      = aia.invoice_id
         AND inv.CANCELLED_DATE  IS NULL
+        AND ROWNUM=1
     )                                               AS TAX_RATE 
     ,(  SELECT SUM(NVL(zl.UNROUNDED_TAX_AMT,0)) 
-        FROM zx_lines_det_factors jtdfl,
+        FROM zx_lines_det_factors jtdfl
             ,zx_lines zl ,ap_invoices_all inv
         WHERE 1=1
         AND jtdfl.TRX_LINE_ID   = zl.TRX_LINE_ID
@@ -111,5 +113,4 @@ AND hle.country             = ftv.territory_code
 AND psv.party_id            = ibm.payee_party_id (+)
 AND 'EMAIL'                 = ibm.remit_advice_delivery_method (+)
 AND SYSDATE BETWEEN NVL (xr.effective_from, SYSDATE - 1) AND NVL (xr.effective_to, SYSDATE + 1)
-AND aia.source              ='MSI'
 AND aia.invoice_num         = :INVOICE_NUMBER
